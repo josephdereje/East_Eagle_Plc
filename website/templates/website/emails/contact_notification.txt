@@ -1,0 +1,12 @@
+New Contact Request — {{ site_name }}
+
+Name: {{ message.name }}
+Email: {{ message.email }}
+Phone: {{ message.phone|default:"—" }}
+Subject: {{ message.subject }}
+
+Message:
+{{ message.message }}
+
+---
+View all messages in the Django admin panel.

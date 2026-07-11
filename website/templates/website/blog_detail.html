@@ -1,0 +1,30 @@
+{% extends 'website/base.html' %}
+
+{% block title %}{{ post.title }} — East Eagle Trading PLC{% endblock %}
+
+{% block content %}
+
+<section class="page-hero page-hero-sm">
+    <div class="container">
+        <a href="{% url 'blogs' %}" class="back-link">← Back to Blog</a>
+        <time class="blog-date">{{ post.created_at|date:"F d, Y" }}</time>
+        <h1 class="page-title">{{ post.title }}</h1>
+        <p class="blog-author">By {{ post.author }}</p>
+        <div class="gold-divider"></div>
+    </div>
+</section>
+
+<section class="section blog-detail-section">
+    <div class="container">
+        <article class="blog-detail reveal">
+            {% if post.image_url %}
+            <div class="blog-detail-image" style="background-image: url('{{ post.image_url }}');"></div>
+            {% endif %}
+            <div class="blog-detail-content">
+                {{ post.content|linebreaks }}
+            </div>
+        </article>
+    </div>
+</section>
+
+{% endblock %}

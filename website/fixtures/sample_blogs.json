@@ -1,0 +1,47 @@
+[
+    {
+        "model": "website.blogpost",
+        "pk": 1,
+        "fields": {
+            "title": "East Eagle Expands into Lithium Mining",
+            "slug": "east-eagle-expands-lithium-mining",
+            "excerpt": "East Eagle Trading PLC announces new high-grade lithium ore mining operations, strengthening Ethiopia's position in the global battery supply chain.",
+            "content": "East Eagle Trading PLC is proud to announce the expansion of our mining operations into high-grade lithium ore extraction and processing.\n\nThis strategic move positions our company at the forefront of Ethiopia's growing role in the global renewable energy supply chain. Lithium is a critical component in battery technology, and our operations will serve both domestic and international markets.\n\nOur team has invested in state-of-the-art processing equipment and maintains strict compliance with international mining standards. We are committed to responsible resource extraction that benefits local communities and the broader East African economy.\n\nContact us to learn more about our mining solutions and export capabilities.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1581094794329-cd2b2e9ac8e0?w=800&q=80",
+            "is_published": true,
+            "created_at": "2026-03-15T10:00:00Z",
+            "updated_at": "2026-03-15T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 2,
+        "fields": {
+            "title": "Solar Energy Projects Powering Rural Ethiopia",
+            "slug": "solar-energy-rural-ethiopia",
+            "excerpt": "Our solar division completes three new installation projects, bringing clean renewable energy to underserved communities across Ethiopia.",
+            "content": "East Eagle Trading PLC's Solar & Energy Solutions division has successfully completed three major solar installation projects in rural Ethiopia.\n\nThese projects bring reliable, clean energy to communities that previously lacked access to the electrical grid. Each installation was designed with local conditions in mind, using certified panels and inverters that meet IEC and TUV standards.\n\nKey highlights:\n- Total capacity: 2.5 MW across all three sites\n- Estimated households served: 1,200+\n- Project completion ahead of schedule\n\nWe continue to partner with international manufacturers to bring the best solar technology to East Africa. Reach out to discuss your energy infrastructure needs.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
+            "is_published": true,
+            "created_at": "2026-04-22T10:00:00Z",
+            "updated_at": "2026-04-22T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 3,
+        "fields": {
+            "title": "New Construction Machinery Fleet Available for Rent",
+            "slug": "construction-machinery-fleet-rental",
+            "excerpt": "East Eagle Trading PLC adds excavators, loaders, and heavy equipment to its rental fleet, supporting Ethiopia's infrastructure boom.",
+            "content": "As Ethiopia's infrastructure development accelerates, East Eagle Trading PLC has expanded its construction machinery rental and sales fleet.\n\nNew additions include:\n- Hydraulic excavators (20T and 35T classes)\n- Wheel loaders for material handling\n- Compaction equipment for road projects\n\nAll machinery is sourced from certified international manufacturers and maintained to the highest operational standards. We offer flexible rental terms — daily, weekly, and monthly — to suit projects of any scale.\n\nOur after-sales team provides on-site maintenance support and spare parts supply to minimize downtime on your projects.\n\nContact our machinery division for availability and pricing.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1581094288330-2311510663f6?w=800&q=80",
+            "is_published": true,
+            "created_at": "2026-05-10T10:00:00Z",
+            "updated_at": "2026-05-10T10:00:00Z"
+        }
+    }
+]

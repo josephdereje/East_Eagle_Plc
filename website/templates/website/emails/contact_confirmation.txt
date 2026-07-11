@@ -1,0 +1,10 @@
+We Received Your Message — {{ site_name }}
+
+Hello {{ name }},
+
+Thank you for contacting {{ site_name }}. We have received your message regarding "{{ subject }}" and our team will respond within 24 hours.
+
+Powering Africa's Future.
+
+---
+East Eagle Trading PLC · +251 933 219 802 · Addis Ababa, Ethiopia

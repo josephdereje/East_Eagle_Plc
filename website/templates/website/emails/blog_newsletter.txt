@@ -1,0 +1,11 @@
+New Blog Post from {{ site_name }}
+
+{{ post.title }}
+By {{ post.author }}
+
+{{ post.excerpt }}
+
+Read the full article: {{ blog_url }}
+
+---
+{{ site_name }} · Addis Ababa, Ethiopia

@@ -1,0 +1,274 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}East Eagle Trading PLC — Powering Africa's Future{% endblock %}
+
+{% block content %}
+
+<!-- ===================== HERO SECTION ===================== -->
+<section class="hero" id="home">
+    <div class="hero-diagonal"></div>
+    <div class="container hero-grid">
+        <!-- Left panel: text & CTA -->
+        <div class="hero-content reveal">
+            <span class="hero-badge">Est. 2021 · Addis Ababa, Ethiopia</span>
+            <h1 class="hero-title">
+                <span class="gold-text">EΛST EΛGLE</span><br>
+                TRΛDING PLC
+            </h1>
+            <p class="hero-subtitle">Powering Africa's Future</p>
+            <p class="hero-desc">
+                A diversified trading and industrial solutions company connecting
+                international manufacturers with Ethiopia's growing infrastructure,
+                energy, and resource-extraction needs.
+            </p>
+            <div class="hero-cta">
+                <a href="#services" class="btn btn-primary">Explore Solutions</a>
+                <a href="{% url 'contact' %}" class="btn btn-secondary">Get a Quote</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label">Core Sectors</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="2021">0</span>
+                    <span class="stat-label">Founded</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Compliance Focus</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right panel: Home Ad slider -->
+        <div class="hero-visual reveal reveal-delay">
+            <div class="home-ad-slider" id="home-ad-slider">
+                <div class="hero-image-frame">
+                    <div class="home-ad-track" id="home-ad-track">
+                        {% if home_ads %}
+                            {% for ad in home_ads %}
+                            <div class="home-ad-slide{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}">
+                                <div class="hero-image" style="background-image: url('{{ ad.image_url }}');"></div>
+                                <div class="hero-image-overlay"></div>
+                                <div class="home-ad-caption">
+                                    <span class="home-ad-tag">{{ ad.get_category_display }}</span>
+                                    <h3>{{ ad.title }}</h3>
+                                    {% if ad.subtitle %}<p class="home-ad-subtitle">{{ ad.subtitle }}</p>{% endif %}
+                                    {% if ad.link_url %}
+                                    <a href="{{ ad.link_url }}" class="btn btn-primary btn-sm">{{ ad.link_text|default:"Learn More" }}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="home-ad-slide active" data-index="0">
+                                <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80');"></div>
+                                <div class="hero-image-overlay"></div>
+                                <div class="home-ad-caption">
+                                    <span class="home-ad-tag">Service</span>
+                                    <h3>Solar &amp; Energy Solutions</h3>
+                                    <p class="home-ad-subtitle">Powering Ethiopia's renewable future</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="hero-frame-border"></div>
+                </div>
+
+                {% if home_ads|length > 1 %}
+                <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous slide">&#10094;</button>
+                <button class="slider-arrow slider-next" id="slider-next" aria-label="Next slide">&#10095;</button>
+                <div class="slider-dots" id="slider-dots">
+                    {% for ad in home_ads %}
+                    <button class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="floating-card card-1">
+                <span class="card-icon">⚡</span>
+                <span>Solar Energy</span>
+            </div>
+            <div class="floating-card card-2">
+                <span class="card-icon">⛏</span>
+                <span>Mining</span>
+            </div>
+            <div class="floating-card card-3">
+                <span class="card-icon">🏗</span>
+                <span>Machinery</span>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ===================== ABOUT TEASER ===================== -->
+<section class="section about" id="about">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">About Us</span>
+            <h2 class="section-title">Building <span class="gold-text">Trust</span> Across East Africa</h2>
+            <div class="gold-divider"></div>
+            <p class="section-desc">
+                Founded in 2021, East Eagle Trading PLC is a diversified industrial solutions
+                company serving Ethiopia and the broader East African market.
+            </p>
+        </div>
+        <div class="about-teaser reveal">
+            <a href="{% url 'about' %}" class="btn btn-primary">Learn More About Us →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SERVICES SECTION ===================== -->
+<section class="section services" id="services">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">What We Do</span>
+            <h2 class="section-title">Our <span class="gold-text">Core Services</span></h2>
+            <div class="gold-divider"></div>
+            <p class="section-desc">Four business lines powering Ethiopia's industrial future.</p>
+        </div>
+
+        <div class="services-grid">
+            <!-- Mining -->
+            <div class="service-card reveal">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <h3>Mining Sector</h3>
+                <ul>
+                    <li>High-grade <strong>lithium</strong> and <strong>copper ore</strong> mining</li>
+                    <li>Ore processing and export solutions</li>
+                    <li>Resource extraction for international markets</li>
+                </ul>
+                <div class="service-glow"></div>
+            </div>
+
+            <!-- Construction -->
+            <div class="service-card reveal reveal-delay">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="14" rx="1"/><path d="M6 6V4a2 2 0 012-2h8a2 2 0 012 2v2"/></svg>
+                </div>
+                <h3>Construction &amp; Machinery</h3>
+                <ul>
+                    <li>Rental and sales of <strong>excavators</strong> and <strong>loaders</strong></li>
+                    <li>Wide range of heavy equipment for infrastructure</li>
+                    <li>Flexible rental terms for all project sizes</li>
+                </ul>
+                <div class="service-glow"></div>
+            </div>
+
+            <!-- Solar -->
+            <div class="service-card reveal reveal-delay-2">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </div>
+                <h3>Solar &amp; Energy Solutions</h3>
+                <ul>
+                    <li>Solar panel supply and distribution</li>
+                    <li>Project design and installation</li>
+                    <li>Energy infrastructure development</li>
+                    <li>Renewable energy consulting</li>
+                </ul>
+                <div class="service-glow"></div>
+            </div>
+
+            <!-- Trading -->
+            <div class="service-card reveal reveal-delay-3">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 3h18v18H3zM3 9h18M9 21V9"/></svg>
+                </div>
+                <h3>Trading &amp; Procurement</h3>
+                <ul>
+                    <li>Import/export of energy and industrial equipment</li>
+                    <li>B2B procurement and supply chain solutions</li>
+                    <li>Sourcing from certified international manufacturers</li>
+                </ul>
+                <div class="service-glow"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== OUR CLIENTS ===================== -->
+<section class="section clients-section" id="clients">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Partnerships</span>
+            <h2 class="section-title">Our <span class="gold-text">Clients</span></h2>
+            <div class="gold-divider"></div>
+            <p class="section-desc">Trusted by leading institutions across Ethiopia.</p>
+        </div>
+
+        <div class="clients-grid reveal">
+            <div class="client-card">
+                <div class="client-logo-wrap">
+                    <img src="{% static 'images/clients/coop-bank.svg' %}" alt="Cooperative Bank of Oromia" class="client-logo">
+                </div>
+                <h4>Cooperative Bank of Oromia</h4>
+                <p>Financial services partnership</p>
+            </div>
+            <div class="client-card">
+                <div class="client-logo-wrap">
+                    <img src="{% static 'images/clients/awash-bank.svg' %}" alt="Awash Bank" class="client-logo">
+                </div>
+                <h4>Awash Bank S.C</h4>
+                <p>Banking &amp; corporate solutions</p>
+            </div>
+            <div class="client-card">
+                <div class="client-logo-wrap">
+                    <img src="{% static 'images/clients/ethio-telecom.svg' %}" alt="Ethiopia Telecom" class="client-logo">
+                </div>
+                <h4>Ethiopia Telecom</h4>
+                <p>Telecommunications infrastructure</p>
+            </div>
+        </div>
+
+        <!-- Animated logo marquee -->
+        <div class="clients-marquee reveal">
+            <div class="marquee-track">
+                <img src="{% static 'images/clients/coop-bank.svg' %}" alt="Cooperative Bank of Oromia">
+                <img src="{% static 'images/clients/awash-bank.svg' %}" alt="Awash Bank">
+                <img src="{% static 'images/clients/ethio-telecom.svg' %}" alt="Ethiopia Telecom">
+                <img src="{% static 'images/clients/coop-bank.svg' %}" alt="Cooperative Bank of Oromia">
+                <img src="{% static 'images/clients/awash-bank.svg' %}" alt="Awash Bank">
+                <img src="{% static 'images/clients/ethio-telecom.svg' %}" alt="Ethiopia Telecom">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CERTIFICATIONS ===================== -->
+<section class="section certifications">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Standards</span>
+            <h2 class="section-title">International <span class="gold-text">Certifications</span></h2>
+            <div class="gold-divider"></div>
+        </div>
+        <div class="cert-grid reveal">
+            <div class="cert-badge"><span>CSA</span></div>
+            <div class="cert-badge"><span>UL</span></div>
+            <div class="cert-badge"><span>IEC</span></div>
+            <div class="cert-badge"><span>TUV</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CTA BANNER ===================== -->
+<section class="section cta-banner">
+    <div class="container cta-inner reveal">
+        <h2>Ready to Power Your Next Project?</h2>
+        <p>Connect with East Eagle Trading PLC for mining, machinery, energy, and procurement solutions.</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">Contact Us Today</a>
+    </div>
+</section>
+
+{% endblock %}

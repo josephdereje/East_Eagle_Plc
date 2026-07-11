@@ -1,0 +1,185 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Contact Us — East Eagle Trading PLC{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="section-tag">Get In Touch</span>
+        <h1 class="page-title">Contact <span class="gold-text">Us</span></h1>
+        <p class="page-desc">Reach East Eagle Trading PLC — we're here to power your next project.</p>
+        <div class="gold-divider"></div>
+    </div>
+</section>
+
+<section class="section contact-section">
+    <div class="container contact-grid">
+
+        <!-- Company information -->
+        <div class="contact-info reveal">
+            <h2>Company Information</h2>
+
+            <div class="info-card">
+                <div class="info-icon">🏢</div>
+                <div>
+                    <h4>Company Name</h4>
+                    <p>East Eagle Trading PLC</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <div>
+                    <h4>Headquarters</h4>
+                    <p>Century Executive Tower, 12 — Room F12/06<br>Addis Ababa, Ethiopia</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <div>
+                    <h4>Telephone</h4>
+                    <p><a href="tel:+251933219802">+251 933 219 802</a></p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🌍</div>
+                <div>
+                    <h4>Market</h4>
+                    <p>Ethiopia &amp; the broader East African region</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">📅</div>
+                <div>
+                    <h4>Founded</h4>
+                    <p>2021</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">⏰</div>
+                <div>
+                    <h4>Business Hours</h4>
+                    <p>Mon – Fri: 8:30 AM – 5:30 PM<br>Sat: 9:00 AM – 1:00 PM</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact form (POST) -->
+        <div class="contact-form-wrap reveal reveal-delay">
+            <h2>Send a Message</h2>
+            <p class="form-desc">Fill out the form below and our team will respond within 24 hours.</p>
+
+            <form method="post" action="{% url 'contact' %}" class="contact-form" novalidate>
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="id_name">Full Name *</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}<span class="form-error">{{ form.name.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="id_email">Email *</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<span class="form-error">{{ form.email.errors.0 }}</span>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="id_phone">Phone</label>
+                        {{ form.phone }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_subject">Subject *</label>
+                    {{ form.subject }}
+                    {% if form.subject.errors %}<span class="form-error">{{ form.subject.errors.0 }}</span>{% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_message">Message *</label>
+                    {{ form.message }}
+                    {% if form.message.errors %}<span class="form-error">{{ form.message.errors.0 }}</span>{% endif %}
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg btn-full">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- World Map Section -->
+<section class="section map-section">
+    <div class="container">
+        <div class="section-header reveal">
+            <span class="section-tag">Our Location</span>
+            <h2 class="section-title">Find Us on the <span class="gold-text">Map</span></h2>
+            <div class="gold-divider"></div>
+            <p class="section-desc">Century Executive Tower, Addis Ababa, Ethiopia</p>
+        </div>
+        <div id="world-map" class="world-map reveal"></div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    /* Initialize Leaflet map centered on Addis Ababa */
+    document.addEventListener('DOMContentLoaded', function () {
+        const mapEl = document.getElementById('world-map');
+        if (!mapEl || typeof L === 'undefined') return;
+
+        // Addis Ababa coordinates (Century Executive Tower area)
+        const lat = 9.0192;
+        const lng = 38.7525;
+
+        const map = L.map('world-map', {
+            scrollWheelZoom: false,
+        }).setView([lat, lng], 14);
+
+        const darkTiles = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+        const lightTiles = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+        const tileLayer = L.tileLayer(isLight ? lightTiles : darkTiles, {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19,
+        }).addTo(map);
+
+        /* Switch map style when theme changes */
+        document.addEventListener('themechange', function (e) {
+            const url = e.detail.theme === 'light' ? lightTiles : darkTiles;
+            tileLayer.setUrl(url);
+        });
+
+        // Custom gold marker
+        const goldIcon = L.divIcon({
+            className: 'map-marker',
+            html: '<div class="marker-pulse"></div><div class="marker-dot"></div>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+        });
+
+        L.marker([lat, lng], { icon: goldIcon })
+            .addTo(map)
+            .bindPopup(
+                '<strong>East Eagle Trading PLC</strong><br>' +
+                'Century Executive Tower, 12 — Room F12/06<br>' +
+                'Addis Ababa, Ethiopia<br>' +
+                '<a href="tel:+251933219802">+251 933 219 802</a>'
+            )
+            .openPopup();
+
+        // Enable scroll zoom on click
+        map.on('click', function () { map.scrollWheelZoom.enable(); });
+        map.on('mouseout', function () { map.scrollWheelZoom.disable(); });
+    });
+</script>
+{% endblock %}

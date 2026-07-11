@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120" role="img" aria-label="East Eagle Trading PLC">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E2C685"/>
+      <stop offset="50%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#8F6E35"/>
+    </linearGradient>
+  </defs>
+  <!-- Eagle emblem circle -->
+  <circle cx="100" cy="38" r="30" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <circle cx="100" cy="38" r="24" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.6"/>
+  <!-- Stylized eagle head -->
+  <path d="M78 42 Q88 28 108 32 Q118 34 120 42 Q115 48 108 50 Q95 52 88 48 Q82 46 78 42Z" fill="url(#goldGrad)"/>
+  <path d="M88 48 Q95 55 108 58 Q115 52 120 42" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Wordmark -->
+  <text x="100" y="82" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="700" font-size="14" fill="url(#goldGrad)" letter-spacing="3">EAST EAGLE</text>
+  <text x="100" y="98" text-anchor="middle" font-family="Montserrat, sans-serif" font-weight="400" font-size="7" fill="url(#goldGrad)" letter-spacing="4" opacity="0.85">TRADING PLC</text>
+</svg>

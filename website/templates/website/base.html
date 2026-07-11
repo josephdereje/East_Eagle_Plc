@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="East Eagle Trading PLC — Mining, Construction Machinery, Solar Energy & Industrial Trading in Ethiopia.">
+    <title>{% block title %}East Eagle Trading PLC{% endblock %}</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Leaflet for world map (contact page) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Prevent flash of wrong theme on load -->
+    <script>
+        (function () {
+            var t = localStorage.getItem('ee-theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', t);
+        })();
+    </script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    <!-- Animated particle canvas background -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- Navigation -->
+    <header class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'index' %}" class="nav-logo">
+                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="logo-img">
+            </a>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
+                <a href="{% url 'index' %}#services" class="nav-link">Services</a>
+                <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+                <a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blogs</a>
+                <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle day/night mode" title="Switch theme">
+                    <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
+                    <span class="theme-icon theme-icon-moon" aria-hidden="true">☾</span>
+                    <span class="theme-toggle-slider"></span>
+                </button>
+                <div class="nav-social">
+                    <a href="#" aria-label="Facebook" class="social-icon">FB</a>
+                    <a href="#" aria-label="Instagram" class="social-icon">IG</a>
+                    <a href="#" aria-label="LinkedIn" class="social-icon">IN</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Django flash messages -->
+    {% if messages %}
+    <div class="flash-messages container">
+        {% for message in messages %}
+        <div class="flash flash-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="footer-logo">
+                <p class="footer-tagline">Powering Africa's Future</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'index' %}#services">Services</a>
+                <a href="{% url 'about' %}">About</a>
+                <a href="{% url 'blogs' %}">Blogs</a>
+                <a href="{% url 'contact' %}">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Century Executive Tower, 12 — Room F12/06</p>
+                <p>Addis Ababa, Ethiopia</p>
+                <p><a href="tel:+251933219802">+251 933 219 802</a></p>
+            </div>
+            <div class="footer-subscribe">
+                <h4>Newsletter</h4>
+                <p class="subscribe-desc">Get blog updates and company news by email.</p>
+                <form method="post" action="{% url 'subscribe' %}" class="subscribe-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <input type="email" name="email" class="form-input subscribe-input" placeholder="your@email.com" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom container">
+            <p>&copy; {% now "Y" %} East Eagle Trading PLC. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

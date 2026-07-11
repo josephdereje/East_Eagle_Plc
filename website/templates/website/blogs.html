@@ -1,0 +1,71 @@
+{% extends 'website/base.html' %}
+
+{% block title %}Blog — East Eagle Trading PLC{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="container">
+        <span class="section-tag">Insights &amp; News</span>
+        <h1 class="page-title">Our <span class="gold-text">Blog</span></h1>
+        <p class="page-desc">Company news, project updates, and industry insights from East Eagle Trading PLC.</p>
+        <div class="gold-divider"></div>
+    </div>
+</section>
+
+<section class="section blog-section">
+    <div class="container">
+        {% if posts %}
+        <div class="blog-grid">
+            {% for post in posts %}
+            <article class="blog-card reveal">
+                {% if post.image_url %}
+                <div class="blog-card-image" style="background-image: url('{{ post.image_url }}');"></div>
+                {% else %}
+                <div class="blog-card-image blog-card-placeholder">
+                    <span class="gold-text">EE</span>
+                </div>
+                {% endif %}
+                <div class="blog-card-body">
+                    <time class="blog-date">{{ post.created_at|date:"M d, Y" }}</time>
+                    <h2><a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a></h2>
+                    <p>{{ post.excerpt }}</p>
+                    <div class="blog-meta">
+                        <span>By {{ post.author }}</span>
+                        <a href="{% url 'blog_detail' post.slug %}" class="read-more">Read More →</a>
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state reveal">
+            <div class="empty-icon">📝</div>
+            <h3>No blog posts yet</h3>
+            <p>Check back soon for company news and industry insights. Admins can add posts via the <a href="/admin/">Django admin panel</a>.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Newsletter Subscribe -->
+<section class="section subscribe-section">
+    <div class="container subscribe-box reveal">
+        <div class="subscribe-content">
+            <span class="section-tag">Stay Updated</span>
+            <h2 class="section-title">Subscribe to Our <span class="gold-text">Newsletter</span></h2>
+            <p class="section-desc">Enter your email to receive new blog posts and company news directly in your inbox.</p>
+        </div>
+        <form method="post" action="{% url 'subscribe' %}" class="subscribe-form subscribe-form-lg">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{% url 'blogs' %}">
+            <div class="subscribe-fields">
+                <input type="text" name="name" class="form-input subscribe-input" placeholder="Your name (optional)">
+                <input type="email" name="email" class="form-input subscribe-input" placeholder="your@email.com" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Subscribe Now</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

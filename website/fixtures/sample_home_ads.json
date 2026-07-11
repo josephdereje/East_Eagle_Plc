@@ -1,0 +1,87 @@
+[
+    {
+        "model": "website.homead",
+        "pk": 1,
+        "fields": {
+            "title": "Solar & Energy Solutions",
+            "subtitle": "Powering Ethiopia's renewable future",
+            "description": "Solar panel supply, project design, installation, and energy infrastructure development.",
+            "image_url": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=900&q=80",
+            "link_url": "#services",
+            "link_text": "Explore Solutions",
+            "category": "service",
+            "display_order": 1,
+            "is_active": true,
+            "created_at": "2026-01-10T10:00:00Z",
+            "updated_at": "2026-01-10T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.homead",
+        "pk": 2,
+        "fields": {
+            "title": "Mining Sector",
+            "subtitle": "High-grade lithium & copper ore exports",
+            "description": "Mining, processing, and export solutions for international markets.",
+            "image_url": "https://images.unsplash.com/photo-1581094794329-cd2b2e9ac8e0?w=900&q=80",
+            "link_url": "#services",
+            "link_text": "Learn More",
+            "category": "service",
+            "display_order": 2,
+            "is_active": true,
+            "created_at": "2026-01-10T10:00:00Z",
+            "updated_at": "2026-01-10T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.homead",
+        "pk": 3,
+        "fields": {
+            "title": "Construction & Machinery",
+            "subtitle": "Excavators, loaders & heavy equipment rental",
+            "description": "Rental and sales of construction machinery for infrastructure projects across Ethiopia.",
+            "image_url": "https://images.unsplash.com/photo-1581094288330-2311510663f6?w=900&q=80",
+            "link_url": "#services",
+            "link_text": "View Fleet",
+            "category": "service",
+            "display_order": 3,
+            "is_active": true,
+            "created_at": "2026-01-10T10:00:00Z",
+            "updated_at": "2026-01-10T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.homead",
+        "pk": 4,
+        "fields": {
+            "title": "Trading & Procurement",
+            "subtitle": "Certified international sourcing",
+            "description": "Import/export of energy and industrial equipment with B2B procurement solutions.",
+            "image_url": "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=900&q=80",
+            "link_url": "/contact/",
+            "link_text": "Get a Quote",
+            "category": "service",
+            "display_order": 4,
+            "is_active": true,
+            "created_at": "2026-01-10T10:00:00Z",
+            "updated_at": "2026-01-10T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.homead",
+        "pk": 5,
+        "fields": {
+            "title": "Special Offer — Equipment Rental",
+            "subtitle": "Flexible terms for your next project",
+            "description": "Limited-time promotional rates on excavators and loaders. Contact us today.",
+            "image_url": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=80",
+            "link_url": "/contact/",
+            "link_text": "Contact Us",
+            "category": "promotion",
+            "display_order": 5,
+            "is_active": true,
+            "created_at": "2026-02-01T10:00:00Z",
+            "updated_at": "2026-02-01T10:00:00Z"
+        }
+    }
+]

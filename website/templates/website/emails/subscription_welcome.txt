@@ -1,0 +1,11 @@
+Welcome to {{ site_name }}!
+
+Hello {{ name }},
+
+Thank you for subscribing to our newsletter at {{ email }}.
+You will now receive the latest blog posts, company news, and industry updates from East Eagle Trading PLC.
+
+Powering Africa's Future.
+
+---
+East Eagle Trading PLC · Addis Ababa, Ethiopia

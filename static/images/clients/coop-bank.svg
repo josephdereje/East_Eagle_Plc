@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" role="img" aria-label="Cooperative Bank of Oromia">
+  <rect width="240" height="80" rx="8" fill="#0a5c5c"/>
+  <circle cx="40" cy="40" r="22" fill="none" stroke="#00b4b4" stroke-width="3"/>
+  <circle cx="40" cy="40" r="12" fill="#00b4b4" opacity="0.6"/>
+  <text x="75" y="35" font-family="Montserrat,sans-serif" font-weight="700" font-size="11" fill="#ffffff">COOPERATIVE BANK</text>
+  <text x="75" y="52" font-family="Montserrat,sans-serif" font-weight="600" font-size="10" fill="#00b4b4">OF OROMIA</text>
+</svg>
