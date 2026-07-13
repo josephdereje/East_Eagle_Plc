@@ -1,0 +1,139 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block content_subtitle %}{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block bodyclass %}dashboard ee-dashboard{% endblock %}
+
+{% block content %}
+<div class="ee-admin-dashboard">
+    <div class="ee-admin-hero">
+        <div class="ee-admin-hero-content">
+            <p class="ee-admin-eyebrow">East Eagle Trading PLC</p>
+            <h2 class="ee-admin-title">Welcome back{% if user.get_short_name %}, {{ user.get_short_name }}{% endif %}</h2>
+            <p class="ee-admin-subtitle">Manage your homepage slider, blog articles, team profiles, contact inbox, and newsletter subscribers.</p>
+        </div>
+        <div class="ee-admin-hero-actions">
+            <a href="/" target="_blank" rel="noopener" class="ee-admin-hero-btn ee-admin-hero-btn--primary">View Live Website ↗</a>
+            <a href="{% url 'admin:website_homead_add' %}" class="ee-admin-hero-btn ee-admin-hero-btn--ghost">+ New Slide</a>
+        </div>
+    </div>
+
+    <div class="ee-admin-stats">
+        <a href="{% url 'admin:website_homead_changelist' %}" class="ee-stat-card">
+            <span class="ee-stat-icon ee-stat-icon--gold">◆</span>
+            <span class="ee-stat-value">{{ stats.active_slides }}</span>
+            <span class="ee-stat-label">Active Slides</span>
+            <span class="ee-stat-meta">max 5 on homepage</span>
+        </a>
+        <a href="{% url 'admin:website_blogpost_changelist' %}" class="ee-stat-card">
+            <span class="ee-stat-icon ee-stat-icon--gold">✎</span>
+            <span class="ee-stat-value">{{ stats.published_posts }}</span>
+            <span class="ee-stat-label">Published Posts</span>
+            <span class="ee-stat-meta">{{ stats.total_posts }} drafts &amp; live</span>
+        </a>
+        <a href="{% url 'admin:website_contactmessage_changelist' %}" class="ee-stat-card{% if stats.unread_messages %} ee-stat-card--alert{% endif %}">
+            <span class="ee-stat-icon">✉</span>
+            <span class="ee-stat-value">{{ stats.unread_messages }}</span>
+            <span class="ee-stat-label">Unread Messages</span>
+            <span class="ee-stat-meta">{{ stats.total_messages }} total enquiries</span>
+        </a>
+        <a href="{% url 'admin:website_emailsubscription_changelist' %}" class="ee-stat-card">
+            <span class="ee-stat-icon ee-stat-icon--gold">◎</span>
+            <span class="ee-stat-value">{{ stats.active_subscribers }}</span>
+            <span class="ee-stat-label">Subscribers</span>
+            <span class="ee-stat-meta">Newsletter audience</span>
+        </a>
+        <a href="{% url 'admin:website_teammember_changelist' %}" class="ee-stat-card">
+            <span class="ee-stat-icon ee-stat-icon--gold">◉</span>
+            <span class="ee-stat-value">{{ stats.active_team }}</span>
+            <span class="ee-stat-label">Team Members</span>
+            <span class="ee-stat-meta">Shown on About page</span>
+        </a>
+    </div>
+
+    <div class="ee-admin-panels">
+        <div class="ee-admin-panel">
+            <h3 class="ee-admin-section-title">Content Modules</h3>
+            <div class="ee-module-grid">
+                <a href="{% url 'admin:website_homead_changelist' %}" class="ee-module-card">
+                    <span class="ee-module-icon">🖼</span>
+                    <div>
+                        <h4>Home Ads</h4>
+                        <p>Homepage showcase (5 slides max)</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+                <a href="{% url 'admin:website_blogpost_changelist' %}" class="ee-module-card">
+                    <span class="ee-module-icon">📝</span>
+                    <div>
+                        <h4>Blog Posts</h4>
+                        <p>Articles &amp; newsletter publishing</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+                <a href="{% url 'admin:website_teammember_changelist' %}" class="ee-module-card">
+                    <span class="ee-module-icon">👥</span>
+                    <div>
+                        <h4>Team Members</h4>
+                        <p>Leadership photos &amp; bios</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+                <a href="{% url 'admin:website_contactmessage_changelist' %}" class="ee-module-card">
+                    <span class="ee-module-icon">💬</span>
+                    <div>
+                        <h4>Contact Messages</h4>
+                        <p>Client form submissions</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+                <a href="{% url 'admin:website_emailsubscription_changelist' %}" class="ee-module-card">
+                    <span class="ee-module-icon">📬</span>
+                    <div>
+                        <h4>Email Subscriptions</h4>
+                        <p>Newsletter subscriber list</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+                <a href="{% url 'admin:password_change' %}" class="ee-module-card ee-module-card--muted">
+                    <span class="ee-module-icon">🔐</span>
+                    <div>
+                        <h4>Account Security</h4>
+                        <p>Change your admin password</p>
+                    </div>
+                    <span class="ee-module-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="ee-admin-panel ee-admin-panel--sidebar">
+            <h3 class="ee-admin-section-title">Quick Actions</h3>
+            <div class="ee-quick-links ee-quick-links--stack">
+                <a href="{% url 'admin:website_homead_add' %}" class="ee-quick-link">+ Add Slider Slide</a>
+                <a href="{% url 'admin:website_blogpost_add' %}" class="ee-quick-link">+ Write Blog Post</a>
+                <a href="{% url 'admin:website_teammember_add' %}" class="ee-quick-link">+ Add Team Member</a>
+                <a href="{% url 'admin:website_contactmessage_changelist' %}?is_read__exact=0" class="ee-quick-link">View Unread Inbox</a>
+            </div>
+
+            {% if recent_messages %}
+            <h3 class="ee-admin-section-title ee-admin-section-title--spaced">Recent Messages</h3>
+            <ul class="ee-recent-list">
+                {% for msg in recent_messages %}
+                <li class="ee-recent-item{% if not msg.is_read %} ee-recent-item--unread{% endif %}">
+                    <a href="{% url 'admin:website_contactmessage_change' msg.pk %}">
+                        <strong>{{ msg.name }}</strong>
+                        <span>{{ msg.subject|truncatechars:40 }}</span>
+                        <time>{{ msg.created_at|date:"M j, H:i" }}</time>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

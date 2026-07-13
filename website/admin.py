@@ -3,6 +3,7 @@ Admin interface for East Eagle Trading PLC website management.
 Manage: Home Ads (slider), Blog Posts, Team Members, Contact Messages, Email Subscriptions.
 """
 from django.contrib import admin
+from django.contrib.admin import AdminSite
 from django.utils.html import format_html
 
 from .emails import send_blog_newsletter
@@ -10,23 +11,58 @@ from .models import BlogPost, ContactMessage, EmailSubscription, HomeAd, TeamMem
 
 
 # Customise admin branding
-admin.site.site_header = 'East Eagle Trading PLC — Admin'
+admin.site.site_header = 'East Eagle Trading PLC'
 admin.site.site_title = 'East Eagle Admin'
-admin.site.index_title = 'Website Management Dashboard'
+admin.site.index_title = ''
+admin.site.enable_nav_sidebar = False
+
+
+def _admin_dashboard_stats():
+    active_slides = HomeAd.objects.filter(is_active=True).order_by('display_order', '-created_at')[:5]
+    return {
+        'active_slides': active_slides.count(),
+        'total_slides': min(HomeAd.objects.filter(is_active=True).count(), 5),
+        'published_posts': BlogPost.objects.filter(is_published=True).count(),
+        'total_posts': BlogPost.objects.count(),
+        'unread_messages': ContactMessage.objects.filter(is_read=False).count(),
+        'total_messages': ContactMessage.objects.count(),
+        'active_subscribers': EmailSubscription.objects.filter(is_active=True).count(),
+        'active_team': TeamMember.objects.filter(is_active=True).count(),
+    }
+
+
+_original_admin_index = AdminSite.index
+
+
+def _custom_admin_index(self, request, extra_context=None):
+    extra_context = extra_context or {}
+    extra_context['stats'] = _admin_dashboard_stats()
+    extra_context['recent_messages'] = ContactMessage.objects.order_by('-created_at')[:5]
+    return _original_admin_index(self, request, extra_context)
+
+
+AdminSite.index = _custom_admin_index
+
+# Hide default auth clutter — use CLI for user management
+try:
+    from django.contrib.auth.models import Group
+    admin.site.unregister(Group)
+except admin.sites.NotRegistered:
+    pass
 
 
 @admin.register(HomeAd)
 class HomeAdAdmin(admin.ModelAdmin):
     """Manage homepage slider slides (services & promotional ads)."""
 
-    list_display = ('title', 'category', 'display_order', 'is_active', 'created_at')
+    list_display = ('title', 'category', 'display_order', 'is_active', 'slide_preview', 'created_at')
     list_filter = ('category', 'is_active')
     search_fields = ('title', 'subtitle', 'description')
     list_editable = ('display_order', 'is_active')
-    readonly_fields = ('created_at', 'updated_at')
+    readonly_fields = ('created_at', 'updated_at', 'slide_preview_large')
     fieldsets = (
         ('Slide Content', {
-            'fields': ('title', 'subtitle', 'description', 'image_url'),
+            'fields': ('title', 'subtitle', 'description', 'image_url', 'slide_preview_large'),
             'description': 'Content shown on the homepage slider.',
         }),
         ('Call to Action', {
@@ -40,6 +76,26 @@ class HomeAdAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
+
+    @admin.display(description='Preview')
+    def slide_preview(self, obj):
+        if obj.image_url:
+            return format_html(
+                '<img src="{}" alt="{}" class="ee-slide-preview" />',
+                obj.image_url,
+                obj.title,
+            )
+        return '—'
+
+    @admin.display(description='Slide preview')
+    def slide_preview_large(self, obj):
+        if obj.pk and obj.image_url:
+            return format_html(
+                '<img src="{}" alt="{}" class="ee-slide-preview-lg" />',
+                obj.image_url,
+                obj.title,
+            )
+        return 'Save with an image URL to see preview.'
 
 
 @admin.register(TeamMember)

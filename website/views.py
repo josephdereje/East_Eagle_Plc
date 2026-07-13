@@ -10,8 +10,8 @@ from .models import BlogPost, EmailSubscription, HomeAd, TeamMember
 
 
 def index(request):
-    """Landing page — GET with active home ad slider slides."""
-    home_ads = HomeAd.objects.filter(is_active=True)
+    """Landing page — GET with up to 5 active home showcase slides."""
+    home_ads = HomeAd.objects.filter(is_active=True)[:5]
     return render(request, 'website/index.html', {'home_ads': home_ads})
 
 

@@ -1,0 +1,31 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | East Eagle Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+<link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+<div id="branding">
+    <h1 id="site-name">
+        <a href="{% url 'admin:index' %}">
+            <img src="{% static 'images/logo.svg' %}" alt="East Eagle" class="ee-admin-logo">
+            <span class="ee-admin-brand-text">East Eagle Trading PLC</span>
+        </a>
+    </h1>
+</div>
+{% endblock %}
+
+{% block nav-global %}
+<div class="ee-admin-nav">
+    <a href="/" target="_blank" rel="noopener" class="ee-admin-view-site">View Website ↗</a>
+</div>
+{% endblock %}

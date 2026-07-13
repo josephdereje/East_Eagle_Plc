@@ -45,63 +45,59 @@
             </div>
         </div>
 
-        <!-- Right panel: Home Ad slider -->
+        <!-- Right panel: Modern service showcase (max 5 slides) -->
         <div class="hero-visual reveal reveal-delay">
-            <div class="home-ad-slider" id="home-ad-slider">
-                <div class="hero-image-frame">
-                    <div class="home-ad-track" id="home-ad-track">
+            <div class="hero-showcase" id="home-ad-slider">
+                <div class="hero-showcase-visual">
+                    <div class="hero-showcase-track" id="home-ad-track">
                         {% if home_ads %}
                             {% for ad in home_ads %}
-                            <div class="home-ad-slide{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}">
-                                <div class="hero-image" style="background-image: url('{{ ad.image_url }}');"></div>
-                                <div class="hero-image-overlay"></div>
-                                <div class="home-ad-caption">
-                                    <span class="home-ad-tag">{{ ad.get_category_display }}</span>
-                                    <h3>{{ ad.title }}</h3>
-                                    {% if ad.subtitle %}<p class="home-ad-subtitle">{{ ad.subtitle }}</p>{% endif %}
-                                    {% if ad.link_url %}
-                                    <a href="{{ ad.link_url }}" class="btn btn-primary btn-sm">{{ ad.link_text|default:"Learn More" }}</a>
-                                    {% endif %}
-                                </div>
+                            <div class="hero-showcase-slide{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}">
+                                <div class="hero-showcase-image" style="background-image: url('{{ ad.image_url }}');"></div>
                             </div>
                             {% endfor %}
                         {% else %}
-                            <div class="home-ad-slide active" data-index="0">
-                                <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80');"></div>
-                                <div class="hero-image-overlay"></div>
-                                <div class="home-ad-caption">
-                                    <span class="home-ad-tag">Service</span>
-                                    <h3>Renewable Energy Solutions</h3>
-                                    <p class="home-ad-subtitle">Solar panels, inverters &amp; power systems</p>
-                                </div>
+                            <div class="hero-showcase-slide active" data-index="0">
+                                <div class="hero-showcase-image" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1200&q=85');"></div>
                             </div>
                         {% endif %}
                     </div>
-                    <div class="hero-frame-border"></div>
                 </div>
 
-                {% if home_ads|length > 1 %}
-                <button class="slider-arrow slider-prev" id="slider-prev" aria-label="Previous slide">&#10094;</button>
-                <button class="slider-arrow slider-next" id="slider-next" aria-label="Next slide">&#10095;</button>
-                <div class="slider-dots" id="slider-dots">
-                    {% for ad in home_ads %}
-                    <button class="slider-dot{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Go to slide {{ forloop.counter }}"></button>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </div>
+                <div class="hero-showcase-panel">
+                    <div class="hero-showcase-captions" id="hero-showcase-captions">
+                        {% if home_ads %}
+                            {% for ad in home_ads %}
+                            <article class="hero-showcase-caption{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}">
+                                <span class="hero-showcase-tag">{{ ad.get_category_display }}</span>
+                                <h3>{{ ad.title }}</h3>
+                                {% if ad.subtitle %}<p class="hero-showcase-sub">{{ ad.subtitle }}</p>{% endif %}
+                                {% if ad.link_url %}
+                                <a href="{{ ad.link_url }}" class="hero-showcase-link">{{ ad.link_text|default:"Learn More" }} →</a>
+                                {% endif %}
+                            </article>
+                            {% endfor %}
+                        {% else %}
+                            <article class="hero-showcase-caption active" data-index="0">
+                                <span class="hero-showcase-tag">Service</span>
+                                <h3>Renewable Energy Solutions</h3>
+                                <p class="hero-showcase-sub">Solar panels, inverters &amp; power systems</p>
+                            </article>
+                        {% endif %}
+                    </div>
 
-            <div class="floating-card card-1">
-                <span class="card-icon">⚡</span>
-                <span>Renewable Energy</span>
-            </div>
-            <div class="floating-card card-2">
-                <span class="card-icon">⛏</span>
-                <span>Mining Export</span>
-            </div>
-            <div class="floating-card card-3">
-                <span class="card-icon">💻</span>
-                <span>IT Equipment</span>
+                    {% if home_ads|length > 1 %}
+                    <div class="hero-showcase-controls">
+                        <button type="button" class="hero-showcase-btn" id="slider-prev" aria-label="Previous">←</button>
+                        <div class="hero-showcase-pills" id="slider-pills">
+                            {% for ad in home_ads %}
+                            <button type="button" class="hero-showcase-pill{% if forloop.first %} active{% endif %}" data-index="{{ forloop.counter0 }}" aria-label="Slide {{ forloop.counter }}: {{ ad.title }}"></button>
+                            {% endfor %}
+                        </div>
+                        <button type="button" class="hero-showcase-btn" id="slider-next" aria-label="Next">→</button>
+                    </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

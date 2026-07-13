@@ -153,6 +153,14 @@
         const toggle = document.getElementById('nav-toggle');
         const menu = document.getElementById('nav-menu');
 
+        function closeMenu() {
+            if (!menu || !toggle) return;
+            menu.classList.remove('open');
+            toggle.classList.remove('open');
+            toggle.setAttribute('aria-expanded', 'false');
+            document.body.classList.remove('nav-open');
+        }
+
         // Add shadow on scroll
         window.addEventListener('scroll', function () {
             if (!navbar) return;
@@ -161,7 +169,8 @@
 
         // Mobile menu toggle
         if (toggle && menu) {
-            toggle.addEventListener('click', function () {
+            toggle.addEventListener('click', function (e) {
+                e.stopPropagation();
                 const isOpen = menu.classList.toggle('open');
                 toggle.classList.toggle('open', isOpen);
                 toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
@@ -170,12 +179,18 @@
 
             // Close menu on link click
             menu.querySelectorAll('.nav-link').forEach(function (link) {
-                link.addEventListener('click', function () {
-                    menu.classList.remove('open');
-                    toggle.classList.remove('open');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    document.body.classList.remove('nav-open');
-                });
+                link.addEventListener('click', closeMenu);
+            });
+
+            // Close when tapping the dimmed backdrop
+            document.addEventListener('click', function (e) {
+                if (!document.body.classList.contains('nav-open')) return;
+                if (menu.contains(e.target) || toggle.contains(e.target)) return;
+                closeMenu();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') closeMenu();
             });
         }
     }
@@ -225,14 +240,15 @@
     }
 
     /* ==========================================================
-       HOME AD SLIDER — auto-play with arrows & dots
+       HERO SHOWCASE — clean fade, 5 slides max
        ========================================================== */
     function initHomeAdSlider() {
         const track = document.getElementById('home-ad-track');
         if (!track) return;
 
-        const slides = track.querySelectorAll('.home-ad-slide');
-        const dots = document.querySelectorAll('.slider-dot');
+        const slides = track.querySelectorAll('.hero-showcase-slide');
+        const captions = document.querySelectorAll('.hero-showcase-caption');
+        const pills = document.querySelectorAll('.hero-showcase-pill');
         const prevBtn = document.getElementById('slider-prev');
         const nextBtn = document.getElementById('slider-next');
 
@@ -240,16 +256,26 @@
 
         let current = 0;
         let autoplayTimer;
-        const INTERVAL = 5000;
+        const INTERVAL = 5500;
+
+        function resetPillProgress() {
+            pills.forEach(function (pill, i) {
+                pill.classList.remove('active');
+                void pill.offsetWidth;
+                if (i === current) pill.classList.add('active');
+            });
+        }
 
         function goTo(index) {
             slides[current].classList.remove('active');
-            if (dots[current]) dots[current].classList.remove('active');
+            if (captions[current]) captions[current].classList.remove('active');
+            if (pills[current]) pills[current].classList.remove('active');
 
             current = (index + slides.length) % slides.length;
 
             slides[current].classList.add('active');
-            if (dots[current]) dots[current].classList.add('active');
+            if (captions[current]) captions[current].classList.add('active');
+            resetPillProgress();
         }
 
         function next() { goTo(current + 1); }
@@ -257,6 +283,7 @@
 
         function startAutoplay() {
             stopAutoplay();
+            resetPillProgress();
             autoplayTimer = setInterval(next, INTERVAL);
         }
 
@@ -267,8 +294,8 @@
         if (nextBtn) nextBtn.addEventListener('click', function () { next(); startAutoplay(); });
         if (prevBtn) prevBtn.addEventListener('click', function () { prev(); startAutoplay(); });
 
-        dots.forEach(function (dot) {
-            dot.addEventListener('click', function () {
+        pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
                 goTo(parseInt(this.getAttribute('data-index'), 10));
                 startAutoplay();
             });
@@ -278,8 +305,30 @@
         if (slider) {
             slider.addEventListener('mouseenter', stopAutoplay);
             slider.addEventListener('mouseleave', startAutoplay);
+
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            slider.addEventListener('touchstart', function (e) {
+                if (!e.changedTouches[0]) return;
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+                stopAutoplay();
+            }, { passive: true });
+
+            slider.addEventListener('touchend', function (e) {
+                if (!e.changedTouches[0]) return;
+                const deltaX = e.changedTouches[0].screenX - touchStartX;
+                const deltaY = e.changedTouches[0].screenY - touchStartY;
+                if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+                    if (deltaX < 0) next();
+                    else prev();
+                }
+                startAutoplay();
+            }, { passive: true });
         }
 
+        resetPillProgress();
         startAutoplay();
     }
 
@@ -319,6 +368,10 @@
        INITIALIZE ALL on DOM ready
        ========================================================== */
     document.addEventListener('DOMContentLoaded', function () {
+        if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+            document.documentElement.classList.add('is-touch');
+        }
+
         initParticles();
         initScrollReveal();
         initCounters();
