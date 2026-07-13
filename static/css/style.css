@@ -1322,6 +1322,175 @@ main, header, footer { position: relative; z-index: 1; }
     font-size: 0.9rem;
 }
 
+.footer-amharic {
+    color: var(--gold-primary);
+    font-size: 0.95rem;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+}
+
+.footer-established {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-top: 6px;
+}
+
+.info-amharic {
+    color: var(--gold-primary);
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+/* 5-column services grid */
+.services-grid-5 {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Business activities */
+.business-activities { background: var(--bg-page); }
+
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.activity-card {
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-top: 3px solid var(--gold-primary);
+    border-radius: 8px;
+    transition: transform var(--transition);
+}
+
+.activity-card:hover { transform: translateY(-4px); }
+
+.activity-card h4 {
+    font-family: var(--font-heading);
+    color: var(--gold-primary);
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.activity-card p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Competitive advantages / values on home */
+.advantages-section { background: var(--bg-section); }
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.value-card {
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.value-card span {
+    color: var(--gold-primary);
+    font-weight: 700;
+}
+
+/* Core values on about page */
+.core-values-section { background: var(--bg-page); }
+
+.core-values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.core-value-card {
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--surface-border);
+    border-radius: 8px;
+    text-align: center;
+    transition: border-color var(--transition), transform var(--transition);
+}
+
+.core-value-card:hover {
+    border-color: var(--gold-primary);
+    transform: translateY(-4px);
+}
+
+.core-value-card h4 {
+    font-family: var(--font-heading);
+    color: var(--gold-primary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.core-value-card p {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+
+/* Mission list */
+.mv-list {
+    list-style: none;
+    padding: 0;
+}
+
+.mv-list li {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    padding: 6px 0 6px 18px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.mv-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    background: var(--gradient-gold);
+    border-radius: 50%;
+}
+
+/* Future objectives */
+.future-objectives { background: var(--bg-section); }
+
+.objectives-list {
+    max-width: 700px;
+    margin: 0 auto;
+    list-style: none;
+    padding: 0;
+}
+
+.objectives-list li {
+    color: var(--text-muted);
+    padding: 12px 0 12px 28px;
+    position: relative;
+    font-size: 0.95rem;
+    border-bottom: 1px solid var(--surface-border);
+}
+
+.objectives-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--gold-primary);
+    font-weight: 700;
+}
+
 .footer-links h4, .footer-contact h4, .footer-social h4 {
     font-family: var(--font-heading);
     font-size: 0.8rem;
@@ -1877,6 +2046,8 @@ main, header, footer { position: relative; z-index: 1; }
     .about-services-list { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr 1fr; }
     .clients-grid { grid-template-columns: 1fr; }
+    .activities-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
     .services-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1922,6 +2093,7 @@ main, header, footer { position: relative; z-index: 1; }
     .footer-grid { grid-template-columns: 1fr; }
     .blog-grid { grid-template-columns: 1fr; }
     .team-grid { grid-template-columns: 1fr; }
+    .values-grid { grid-template-columns: 1fr; }
 }
 
 /* ============================================================
