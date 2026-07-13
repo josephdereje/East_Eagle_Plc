@@ -1,0 +1,4 @@
+# Optional — only if DB_ENGINE=mysql in cPanel environment variables.
+# Requires MySQL/MariaDB dev headers on the server (often unavailable on shared hosting).
+-r requirements.txt
+mysqlclient>=2.2.0

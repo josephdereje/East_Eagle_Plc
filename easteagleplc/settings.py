@@ -29,11 +29,16 @@ ALLOWED_HOSTS = env_list(
     'DJANGO_ALLOWED_HOSTS',
     'localhost,127.0.0.1,easteagleplc.com,www.easteagleplc.com',
 )
+# Always allow both production domains (cPanel env may omit www)
+_PRODUCTION_HOSTS = ('easteagleplc.com', 'www.easteagleplc.com')
+ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + list(_PRODUCTION_HOSTS)))
 
 CSRF_TRUSTED_ORIGINS = env_list(
     'DJANGO_CSRF_TRUSTED_ORIGINS',
     'https://easteagleplc.com,https://www.easteagleplc.com',
 )
+_PRODUCTION_ORIGINS = ('https://easteagleplc.com', 'https://www.easteagleplc.com')
+CSRF_TRUSTED_ORIGINS = list(dict.fromkeys(CSRF_TRUSTED_ORIGINS + list(_PRODUCTION_ORIGINS)))
 
 INSTALLED_APPS = [
     'django.contrib.admin',

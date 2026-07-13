@@ -9,8 +9,16 @@ cd "$APP_DIR"
 source "$VENV_DIR/bin/activate"
 
 pip install -r requirements.txt
+# Only install MySQL driver when using MySQL (set DB_ENGINE=mysql in cPanel)
+if [ "${DB_ENGINE:-}" = "mysql" ]; then
+  pip install -r requirements-mysql.txt
+fi
 python manage.py migrate
 python manage.py collectstatic --noinput
+
+# Restart Passenger app (cPanel reads this file's timestamp)
+mkdir -p tmp
+touch tmp/restart.txt
 
 echo ""
 echo "Done. App path: $APP_DIR"
