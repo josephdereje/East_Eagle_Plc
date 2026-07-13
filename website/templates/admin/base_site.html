@@ -4,6 +4,9 @@
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | East Eagle Admin{% endblock %}
 
 {% block extrastyle %}
+<script>
+(function(){var k='ee-admin-theme',t;try{t=localStorage.getItem(k)}catch(e){}document.documentElement.setAttribute('data-theme',t==='light'?'light':'dark');})();
+</script>
 {{ block.super }}
 <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
 <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
@@ -11,6 +14,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="{% static 'js/admin.js' %}" defer></script>
 {% endblock %}
 
 {% block branding %}
@@ -26,6 +34,11 @@
 
 {% block nav-global %}
 <div class="ee-admin-nav">
+    <button type="button" class="ee-theme-toggle" aria-pressed="false" aria-label="Switch to day mode" title="Day mode">
+        <span class="ee-theme-icon ee-theme-icon-sun" aria-hidden="true">☀</span>
+        <span class="ee-theme-icon ee-theme-icon-moon" aria-hidden="true">☽</span>
+        <span class="ee-theme-label">Day</span>
+    </button>
     <a href="/" target="_blank" rel="noopener" class="ee-admin-view-site">View Website ↗</a>
 </div>
 {% endblock %}

@@ -8,9 +8,7 @@
 #nav-sidebar,
 .toggle-nav-sidebar,
 #content-related,
-.dashboard .module,
-.theme-toggle,
-[data-theme-toggle] {
+.dashboard .module {
     display: none !important;
 }
 
@@ -1442,4 +1440,307 @@ input[type="checkbox"] {
     .ee-admin-hero-actions {
         flex-direction: column;
     }
+}
+
+/* ============================================================
+   Theme toggle — day / night
+   ============================================================ */
+.ee-admin-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ee-theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-radius: 999px;
+    color: var(--ee-gold-light);
+    font-family: var(--ee-font-heading);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.ee-theme-toggle:hover {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: var(--ee-gold);
+    color: #fff;
+}
+
+.ee-theme-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+.ee-theme-icon-moon {
+    display: none;
+}
+
+[data-theme="light"] .ee-theme-icon-sun {
+    display: none;
+}
+
+[data-theme="light"] .ee-theme-icon-moon {
+    display: inline;
+}
+
+.ee-theme-toggle--login {
+    position: fixed;
+    top: max(20px, env(safe-area-inset-top));
+    right: max(20px, env(safe-area-inset-right));
+    z-index: 10;
+}
+
+/* ============================================================
+   Light / day theme — matches main website cream palette
+   ============================================================ */
+[data-theme="light"] {
+    --ee-black: #F5F3EF;
+    --ee-charcoal: #FFFFFF;
+    --ee-surface: #FFFFFF;
+    --ee-navy: #EDE9E1;
+    --ee-muted: #5A6B7D;
+    --ee-text: #2C343B;
+    --ee-gold-light: #8F6E35;
+    --ee-shadow: 0 12px 40px rgba(27, 42, 65, 0.08);
+}
+
+[data-theme="light"] body {
+    background: #F5F3EF !important;
+    color: #2C343B !important;
+}
+
+[data-theme="light"] body::before {
+    background:
+        radial-gradient(ellipse 80% 50% at 20% -10%, rgba(212, 175, 55, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 90% 100%, rgba(27, 42, 65, 0.06) 0%, transparent 50%);
+}
+
+[data-theme="light"] #header {
+    background: linear-gradient(135deg, #1B2A41 0%, #2C343B 100%) !important;
+}
+
+[data-theme="light"] div.breadcrumbs {
+    background: #EDE9E1 !important;
+    color: #5A6B7D !important;
+    border-bottom-color: rgba(27, 42, 65, 0.08) !important;
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] .ee-page-title {
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] .ee-admin-hero {
+    background: linear-gradient(135deg, #FFFFFF 0%, #EDE9E1 70%, rgba(212, 175, 55, 0.08) 100%);
+    border-color: rgba(27, 42, 65, 0.1);
+}
+
+[data-theme="light"] .ee-admin-title {
+    color: #1B2A41;
+}
+
+[data-theme="light"] .ee-admin-hero-btn--ghost {
+    color: #8F6E35 !important;
+    border-color: rgba(143, 110, 53, 0.35);
+}
+
+[data-theme="light"] .ee-admin-hero-btn--ghost:hover {
+    background: rgba(212, 175, 55, 0.12);
+}
+
+[data-theme="light"] .ee-stat-card,
+[data-theme="light"] .ee-admin-panel,
+[data-theme="light"] .ee-module-card,
+[data-theme="light"] #changelist,
+[data-theme="light"] .change-form #content-main form,
+[data-theme="light"] form .module,
+[data-theme="light"] .delete-confirmation,
+[data-theme="light"] .delete-confirmation + form {
+    background: #FFFFFF !important;
+    border-color: rgba(27, 42, 65, 0.1) !important;
+}
+
+[data-theme="light"] .ee-stat-label,
+[data-theme="light"] .ee-module-card h4,
+[data-theme="light"] .ee-recent-item strong {
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] .ee-stat-value {
+    color: #8F6E35;
+}
+
+[data-theme="light"] .ee-module-card:hover {
+    background: #FAFAF8 !important;
+    border-color: rgba(212, 175, 55, 0.35) !important;
+}
+
+[data-theme="light"] .ee-module-card p,
+[data-theme="light"] .ee-recent-item span {
+    color: #5A6B7D;
+}
+
+[data-theme="light"] .ee-quick-link {
+    background: #EDE9E1 !important;
+    color: #1B2A41 !important;
+    border-color: rgba(27, 42, 65, 0.08) !important;
+}
+
+[data-theme="light"] .ee-quick-link:hover {
+    background: rgba(212, 175, 55, 0.15) !important;
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] .ee-recent-item {
+    border-color: rgba(27, 42, 65, 0.08) !important;
+}
+
+[data-theme="light"] .ee-recent-item:hover {
+    background: rgba(212, 175, 55, 0.06) !important;
+}
+
+[data-theme="light"] .ee-back-dashboard,
+[data-theme="light"] .ee-back-list {
+    color: #8F6E35 !important;
+    border-color: rgba(143, 110, 53, 0.3);
+}
+
+[data-theme="light"] .ee-back-dashboard:hover,
+[data-theme="light"] .ee-back-list:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] #toolbar,
+[data-theme="light"] #changelist-filter,
+[data-theme="light"] .submit-row,
+[data-theme="light"] .paginator,
+[data-theme="light"] .actions,
+[data-theme="light"] .messagelist li {
+    background: #EDE9E1 !important;
+    color: #2C343B !important;
+}
+
+[data-theme="light"] #result_list thead th,
+[data-theme="light"] .module h2,
+[data-theme="light"] .inline-group h2 {
+    background: linear-gradient(90deg, #1B2A41, #2C343B) !important;
+    color: #E2C685 !important;
+}
+
+[data-theme="light"] #result_list tbody tr {
+    background: #FFFFFF !important;
+}
+
+[data-theme="light"] #result_list tbody tr:nth-child(even) {
+    background: #FAFAF8 !important;
+}
+
+[data-theme="light"] #result_list tbody tr:hover {
+    background: rgba(212, 175, 55, 0.08) !important;
+}
+
+[data-theme="light"] #result_list tbody td,
+[data-theme="light"] #result_list tbody th,
+[data-theme="light"] #result_list a {
+    color: #2C343B !important;
+}
+
+[data-theme="light"] #result_list a:hover {
+    color: #8F6E35 !important;
+}
+
+[data-theme="light"] input[type="text"],
+[data-theme="light"] input[type="password"],
+[data-theme="light"] input[type="email"],
+[data-theme="light"] input[type="url"],
+[data-theme="light"] input[type="number"],
+[data-theme="light"] input[type="date"],
+[data-theme="light"] input[type="datetime-local"],
+[data-theme="light"] textarea,
+[data-theme="light"] select,
+[data-theme="light"] #toolbar form input[type="text"],
+[data-theme="light"] .actions select,
+[data-theme="light"] .ee-login-field input {
+    background: #FFFFFF !important;
+    color: #1B2A41 !important;
+    border-color: rgba(27, 42, 65, 0.15) !important;
+}
+
+[data-theme="light"] .form-row {
+    border-bottom-color: rgba(27, 42, 65, 0.06) !important;
+}
+
+[data-theme="light"] .messagelist li {
+    border-color: rgba(27, 42, 65, 0.12) !important;
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] #changelist-search img {
+    filter: none;
+    opacity: 0.55;
+}
+
+/* Login — day mode */
+[data-theme="light"] .ee-login-bg {
+    background: linear-gradient(180deg, #EDE9E1 0%, #F5F3EF 50%, #FFFFFF 100%);
+}
+
+[data-theme="light"] .ee-login-brand-panel {
+    border-right-color: rgba(27, 42, 65, 0.08);
+}
+
+[data-theme="light"] .ee-login-company-line {
+    color: #1B2A41;
+}
+
+[data-theme="light"] .ee-login-form-panel {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="light"] .ee-login-card {
+    background: #FFFFFF;
+    border-color: rgba(27, 42, 65, 0.08);
+    box-shadow: 0 24px 80px rgba(27, 42, 65, 0.08);
+}
+
+[data-theme="light"] .ee-login-card-header h2 {
+    color: #1B2A41 !important;
+}
+
+[data-theme="light"] .ee-login-field label {
+    color: #8F6E35 !important;
+}
+
+[data-theme="light"] .ee-login-footer {
+    border-top-color: rgba(27, 42, 65, 0.08);
+}
+
+[data-theme="light"] .ee-theme-toggle {
+    background: rgba(255, 255, 255, 0.85);
+    color: #8F6E35;
+    border-color: rgba(143, 110, 53, 0.35);
+}
+
+[data-theme="light"] .ee-theme-toggle:hover {
+    background: #FFFFFF;
+    color: #1B2A41;
+}
+
+[data-theme="light"] #user-tools a,
+[data-theme="light"] #logout-form button {
+    color: #E2C685 !important;
+}
+
+[data-theme="light"] #logout-form button:hover {
+    color: #fff !important;
 }
