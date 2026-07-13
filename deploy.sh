@@ -18,6 +18,9 @@ python manage.py collectstatic --noinput
 
 # Upload folders for blog covers and team photos
 mkdir -p media/blog media/team tmp
+chmod 755 media media/blog media/team tmp 2>/dev/null || true
+chmod 644 passenger_wsgi.py manage.py 2>/dev/null || true
+chmod 644 .htaccess 2>/dev/null || true
 touch tmp/restart.txt
 
 echo ""

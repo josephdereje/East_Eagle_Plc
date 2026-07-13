@@ -193,3 +193,6 @@ chmod -R u+rwX /home/easteag1/easteagleplc
 | Static files missing | `python manage.py collectstatic --noinput` + restart |
 | `no such column: website_blogpost.image` on `/blogs/` | Run `python manage.py migrate --noinput` then `touch tmp/restart.txt` |
 | Blog page shows Django debug error page | Set `DJANGO_DEBUG=False` in cPanel env vars, then restart |
+| **403 Forbidden** (LiteSpeed page) | Restart Python app in cPanel; run `./deploy.sh`; check **Setup Python App** is **Running** |
+| **Site can't be reached / timeout** | Run AutoSSL for www; share `https://www.easteagleplc.com`; run `touch tmp/restart.txt` |
+| App slow or times out after idle | `.htaccess` uses `PassengerMinInstances 1` — pull latest and restart |

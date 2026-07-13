@@ -13,7 +13,8 @@ if APP_ROOT not in sys.path:
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'easteagleplc.settings')
 
-# Force production domains before Django loads (fixes DisallowedHost on cPanel)
+# Production defaults on cPanel (env vars in Setup Python App override these)
+os.environ.setdefault('DJANGO_DEBUG', 'False')
 _required_hosts = (
     'localhost',
     '127.0.0.1',

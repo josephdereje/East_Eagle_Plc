@@ -2,11 +2,17 @@
 Views for the East Eagle Trading PLC website.
 All pages use GET; contact and subscribe forms use POST.
 """
+from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ContactForm, SubscribeForm
 from .models import BlogPost, EmailSubscription, HomeAd, TeamMember
+
+
+def health(request):
+    """Lightweight uptime check — no database, for monitoring and Passenger."""
+    return HttpResponse('ok', content_type='text/plain')
 
 
 def index(request):

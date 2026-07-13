@@ -6,15 +6,26 @@ PassengerPython /home/easteag1/virtualenv/easteagleplc/3.9/bin/python3.9
 PassengerAppType wsgi
 PassengerStartupFile passenger_wsgi.py
 
+# Keep one worker running — avoids ERR_TIMED_OUT after idle periods
+PassengerMinInstances 1
+PassengerMaxPoolSize 4
+PassengerStartupTimeout 120
+
+Options -Indexes +FollowSymLinks
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Serve uploaded media files (team photos, blog covers)
-    RewriteRule ^media/(.*)$ /home/easteag1/easteagleplc/media/$1 [L]
+    # Let existing files/folders through (media uploads, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
 
-    # Always use canonical https://www.easteagleplc.com
-    # Fixes visitors who type http:// or easteagleplc.com without www
-    RewriteCond %{HTTPS} off [OR]
+    # Force HTTPS first
+    RewriteCond %{HTTPS} off
+    RewriteRule ^ https://www.easteagleplc.com%{REQUEST_URI} [L,R=301]
+
+    # Force www (canonical URL for all visitors)
     RewriteCond %{HTTP_HOST} !^www\.easteagleplc\.com$ [NC]
     RewriteRule ^ https://www.easteagleplc.com%{REQUEST_URI} [L,R=301]
 </IfModule>
