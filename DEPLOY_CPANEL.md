@@ -122,9 +122,45 @@ touch tmp/restart.txt
 Passenger restarts the app on the next request when `tmp/restart.txt` is touched.
 (There is no `touch.py` file — the command is `touch tmp/restart.txt`.)
 
-Visit:
-- **Website:** `https://easteagleplc.com/`
-- **Admin:** `https://easteagleplc.com/admin/`
+Visit (always use **www**):
+- **Website:** `https://www.easteagleplc.com/`
+- **Admin:** `https://www.easteagleplc.com/admin/`
+
+---
+
+## Fix “Site can’t be reached” (DNS & SSL)
+
+If some visitors cannot open the site, check these in **cPanel**:
+
+### 1. DNS records
+
+**Zone Editor** → `easteagleplc.com`:
+
+| Type | Name | Value |
+|------|------|-------|
+| A | `@` | Your server IP (e.g. `91.204.209.28`) |
+| CNAME | `www` | `easteagleplc.com` |
+
+Use your hosting provider’s nameservers (cPanel → **Domains**). Broken custom nameservers cause “site can’t be reached” for many users.
+
+### 2. SSL certificate (important)
+
+The wildcard cert `*.easteagleplc.com` covers **www** only — **not** `easteagleplc.com` without www.
+
+cPanel → **SSL/TLS Status** → **Run AutoSSL** and ensure the certificate lists **both**:
+- `easteagleplc.com`
+- `www.easteagleplc.com`
+
+Until apex SSL is fixed, `.htaccess` redirects **http** visitors to `https://www.easteagleplc.com`. Users who type `https://easteagleplc.com` still need the apex cert from AutoSSL.
+
+### 3. Redeploy after git pull
+
+```bash
+cd /home/easteag1/easteagleplc
+git pull origin main
+./deploy.sh
+touch tmp/restart.txt
+```
 
 ---
 

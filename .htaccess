@@ -6,8 +6,15 @@ PassengerPython /home/easteag1/virtualenv/easteagleplc/3.9/bin/python3.9
 PassengerAppType wsgi
 PassengerStartupFile passenger_wsgi.py
 
-# Serve uploaded team photos
 <IfModule mod_rewrite.c>
     RewriteEngine On
+
+    # Serve uploaded media files (team photos, blog covers)
     RewriteRule ^media/(.*)$ /home/easteag1/easteagleplc/media/$1 [L]
+
+    # Always use canonical https://www.easteagleplc.com
+    # Fixes visitors who type http:// or easteagleplc.com without www
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} !^www\.easteagleplc\.com$ [NC]
+    RewriteRule ^ https://www.easteagleplc.com%{REQUEST_URI} [L,R=301]
 </IfModule>
