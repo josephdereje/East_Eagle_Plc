@@ -25,9 +25,15 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = env_bool('DJANGO_DEBUG', True)
 
-ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1')
+ALLOWED_HOSTS = env_list(
+    'DJANGO_ALLOWED_HOSTS',
+    'localhost,127.0.0.1,easteagleplc.com,www.easteagleplc.com',
+)
 
-CSRF_TRUSTED_ORIGINS = env_list('DJANGO_CSRF_TRUSTED_ORIGINS')
+CSRF_TRUSTED_ORIGINS = env_list(
+    'DJANGO_CSRF_TRUSTED_ORIGINS',
+    'https://easteagleplc.com,https://www.easteagleplc.com',
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'east_eagle.urls'
+ROOT_URLCONF = 'easteagleplc.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'east_eagle.wsgi.application'
+WSGI_APPLICATION = 'easteagleplc.wsgi.application'
 
 # --- Database ---
 if os.environ.get('DB_ENGINE') == 'mysql':
@@ -138,7 +144,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 
 DEFAULT_FROM_EMAIL = os.environ.get(
     'DEFAULT_FROM_EMAIL',
-    'East Eagle Trading PLC <noreply@easteagle.com>',
+    'East Eagle Trading PLC <noreply@easteagleplc.com>',
 )
-ADMIN_NOTIFICATION_EMAIL = os.environ.get('ADMIN_NOTIFICATION_EMAIL', 'admin@easteagle.com')
-SITE_URL = os.environ.get('SITE_URL', 'http://127.0.0.1:8000')
+ADMIN_NOTIFICATION_EMAIL = os.environ.get('ADMIN_NOTIFICATION_EMAIL', 'admin@easteagleplc.com')
+SITE_URL = os.environ.get('SITE_URL', 'https://easteagleplc.com')

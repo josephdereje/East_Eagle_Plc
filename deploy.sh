@@ -3,7 +3,7 @@
 set -e
 
 APP_DIR="${APP_DIR:-/home/easteag1/easteagleplc}"
-VENV_DIR="${VENV_DIR:-/home/easteag1/virtualenv/easteagleplc/3.11}"
+VENV_DIR="${VENV_DIR:-/home/easteag1/virtualenv/easteagleplc/3.9}"
 
 cd "$APP_DIR"
 source "$VENV_DIR/bin/activate"

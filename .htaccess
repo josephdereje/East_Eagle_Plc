@@ -2,7 +2,7 @@
 PassengerEnabled On
 PassengerAppRoot /home/easteag1/easteagleplc
 PassengerBaseURI /
-PassengerPython /home/easteag1/virtualenv/easteagleplc/3.11/bin/python3.11
+PassengerPython /home/easteag1/virtualenv/easteagleplc/3.9/bin/python3.9
 PassengerAppType wsgi
 PassengerStartupFile passenger_wsgi.py
 

@@ -44,7 +44,7 @@ Create a superuser: `python manage.py createsuperuser`
 - In development, emails print to the **terminal console**.
 
 ### Email Configuration (Production)
-Edit `east_eagle/settings.py`:
+Edit `easteagleplc/settings.py`:
 ```python
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -74,10 +74,10 @@ SITE_URL = 'https://yourdomain.com'
 ## Project Structure
 
 ```
-East_Eagle_Plc/
+easteagleplc/
 ├── manage.py
 ├── requirements.txt
-├── east_eagle/          # Django project settings
+├── easteagleplc/        # Django project settings
 ├── website/             # Main app (models, views, templates)
 │   ├── models.py        # BlogPost, ContactMessage
 │   ├── views.py         # GET/POST handlers

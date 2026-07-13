@@ -3,7 +3,7 @@
 **cPanel username:** `easteag1`  
 **Application name:** `easteagleplc`  
 **App directory:** `/home/easteag1/easteagleplc`  
-**Virtualenv:** `/home/easteag1/virtualenv/easteagleplc/3.11/`
+**Virtualenv:** `/home/easteag1/virtualenv/easteagleplc/3.9/`
 
 ---
 
@@ -16,7 +16,7 @@
 | Full path | `/home/easteag1/easteagleplc` |
 | Application startup file | `passenger_wsgi.py` |
 | Application entry point | `application` |
-| Python version | 3.10 or 3.11 |
+| Python version | 3.9 |
 
 ---
 
@@ -32,7 +32,7 @@ cd /home/easteag1/easteagleplc
 rm -rf .git
 
 git init
-git remote add origin https://github.com/josephdereje/East_Eagle_Plc.git
+git remote add origin https://github.com/josephdereje/easteagleplc.git
 git fetch origin
 git checkout -b main
 git reset --hard origin/main
@@ -41,7 +41,7 @@ git reset --hard origin/main
 If remote already exists:
 ```bash
 cd /home/easteag1/easteagleplc
-git remote set-url origin https://github.com/josephdereje/East_Eagle_Plc.git
+git remote set-url origin https://github.com/josephdereje/easteagleplc.git
 git fetch origin
 git reset --hard origin/main
 ```
@@ -62,9 +62,9 @@ cPanel → **Setup Python App** → `easteagleplc` → **Environment variables**
 ```
 DJANGO_DEBUG=False
 DJANGO_SECRET_KEY=paste-a-long-random-key-here
-DJANGO_ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
-DJANGO_CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
-SITE_URL=https://yourdomain.com
+DJANGO_ALLOWED_HOSTS=easteagleplc.com,www.easteagleplc.com
+DJANGO_CSRF_TRUSTED_ORIGINS=https://easteagleplc.com,https://www.easteagleplc.com
+SITE_URL=https://easteagleplc.com
 ```
 
 ---
@@ -73,7 +73,7 @@ SITE_URL=https://yourdomain.com
 
 ```bash
 cd /home/easteag1/easteagleplc
-source /home/easteag1/virtualenv/easteagleplc/3.11/bin/activate
+source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate
 
 pip install -r requirements.txt
 python manage.py migrate
@@ -98,8 +98,8 @@ python manage.py createsuperuser
 cPanel → **Setup Python App** → `easteagleplc` → **Restart**
 
 Visit:
-- **Website:** `https://yourdomain.com/`
-- **Admin:** `https://yourdomain.com/admin/`
+- **Website:** `https://easteagleplc.com/`
+- **Admin:** `https://easteagleplc.com/admin/`
 
 ---
 
@@ -107,7 +107,7 @@ Visit:
 
 ```apache
 PassengerAppRoot /home/easteag1/easteagleplc
-PassengerPython /home/easteag1/virtualenv/easteagleplc/3.11/bin/python3.11
+PassengerPython /home/easteag1/virtualenv/easteagleplc/3.9/bin/python3.9
 ```
 
 ---
