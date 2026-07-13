@@ -42,7 +42,16 @@ class BlogPost(models.Model):
     excerpt = models.TextField(max_length=500, help_text='Short summary shown on blog listing.')
     content = models.TextField()
     author = models.CharField(max_length=100, default='East Eagle Team')
-    image_url = models.URLField(blank=True, help_text='Optional cover image URL.')
+    image = models.ImageField(
+        upload_to='blog/',
+        blank=True,
+        null=True,
+        help_text='Upload a cover image from your computer.',
+    )
+    image_url = models.URLField(
+        blank=True,
+        help_text='Or paste an external image URL. Upload takes priority if both are set.',
+    )
     is_published = models.BooleanField(default=False, help_text='Check to publish and notify subscribers.')
     newsletter_sent = models.BooleanField(
         default=False,
@@ -63,6 +72,23 @@ class BlogPost(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+    @property
+    def cover_image(self):
+        """Cover image URL — uploaded file takes priority over external URL."""
+        if self.image:
+            return self.image.url
+        return self.image_url or ''
+
+    @property
+    def cover_image_absolute(self):
+        """Absolute cover image URL for emails and external use."""
+        from django.conf import settings
+
+        url = self.cover_image
+        if url and url.startswith('/'):
+            return f'{settings.SITE_URL.rstrip("/")}{url}'
+        return url
 
 
 class ContactMessage(models.Model):

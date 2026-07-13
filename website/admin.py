@@ -143,17 +143,21 @@ class TeamMemberAdmin(admin.ModelAdmin):
 class BlogPostAdmin(admin.ModelAdmin):
     """Manage blog posts. Publishing sends newsletter to all subscribers."""
 
-    list_display = ('title', 'author', 'is_published', 'newsletter_sent', 'created_at')
+    list_display = ('title', 'author', 'cover_preview', 'is_published', 'newsletter_sent', 'created_at')
     list_filter = ('is_published', 'newsletter_sent', 'created_at')
     search_fields = ('title', 'content', 'author')
     prepopulated_fields = {'slug': ('title',)}
     list_editable = ('is_published',)
-    readonly_fields = ('newsletter_sent', 'created_at', 'updated_at')
+    readonly_fields = ('newsletter_sent', 'created_at', 'updated_at', 'cover_preview')
     actions = ['send_newsletter_action', 'reset_newsletter_flag']
 
     fieldsets = (
         ('Post Content', {
-            'fields': ('title', 'slug', 'excerpt', 'content', 'author', 'image_url'),
+            'fields': ('title', 'slug', 'excerpt', 'content', 'author'),
+        }),
+        ('Cover Image', {
+            'fields': ('image', 'image_url', 'cover_preview'),
+            'description': 'Upload an image or paste a URL — upload is used first if both are provided.',
         }),
         ('Publishing', {
             'fields': ('is_published', 'newsletter_sent'),
@@ -164,6 +168,17 @@ class BlogPostAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
+
+    @admin.display(description='Cover')
+    def cover_preview(self, obj):
+        url = obj.cover_image
+        if obj.pk and url:
+            return format_html(
+                '<img src="{}" alt="{}" class="ee-slide-preview" />',
+                url,
+                obj.title,
+            )
+        return '—'
 
     @admin.action(description='Send newsletter email to all subscribers')
     def send_newsletter_action(self, request, queryset):
