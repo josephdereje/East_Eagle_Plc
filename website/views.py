@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ContactForm, SubscribeForm
-from .models import BlogPost, EmailSubscription, HomeAd
+from .models import BlogPost, EmailSubscription, HomeAd, TeamMember
 
 
 def index(request):
@@ -17,7 +17,8 @@ def index(request):
 
 def about(request):
     """About page — company background, mission, vision, team, structure."""
-    return render(request, 'website/about.html')
+    team_members = TeamMember.objects.filter(is_active=True)
+    return render(request, 'website/about.html', {'team_members': team_members})
 
 
 def blogs(request):

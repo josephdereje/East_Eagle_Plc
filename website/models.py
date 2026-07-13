@@ -1,5 +1,5 @@
 """
-Database models for blog posts, contact messages, home ads, and email subscriptions.
+Database models for blog posts, contact messages, home ads, team members, and email subscriptions.
 """
 from django.db import models
 from django.utils.text import slugify
@@ -101,3 +101,46 @@ class EmailSubscription(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class TeamMember(models.Model):
+    """Leadership / team profile — photo and bio managed via Django admin."""
+
+    name = models.CharField(max_length=120)
+    role = models.CharField(max_length=120, help_text='Job title, e.g. Chief Executive Officer')
+    department = models.CharField(max_length=80, blank=True, help_text='Short label, e.g. Managing Director')
+    bio = models.TextField(blank=True, help_text='Short description shown on the About page.')
+    photo = models.ImageField(
+        upload_to='team/',
+        blank=True,
+        null=True,
+        help_text='Upload a square portrait photo (recommended 400×400 or larger).',
+    )
+    initials = models.CharField(
+        max_length=4,
+        blank=True,
+        help_text='Fallback initials when no photo is uploaded (e.g. CEO).',
+    )
+    email = models.EmailField(blank=True)
+    linkedin_url = models.URLField(blank=True)
+    display_order = models.PositiveIntegerField(default=0, help_text='Lower numbers appear first.')
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['display_order', 'name']
+        verbose_name = 'Team Member'
+        verbose_name_plural = 'Team Members'
+
+    def __str__(self):
+        return f'{self.name} — {self.role}'
+
+    def save(self, *args, **kwargs):
+        if not self.initials and self.name:
+            parts = self.name.split()
+            if len(parts) >= 2:
+                self.initials = (parts[0][0] + parts[-1][0]).upper()
+            else:
+                self.initials = self.name[:2].upper()
+        super().save(*args, **kwargs)

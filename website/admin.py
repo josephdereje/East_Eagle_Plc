@@ -1,11 +1,12 @@
 """
 Admin interface for East Eagle Trading PLC website management.
-Manage: Home Ads (slider), Blog Posts, Contact Messages, Email Subscriptions.
+Manage: Home Ads (slider), Blog Posts, Team Members, Contact Messages, Email Subscriptions.
 """
 from django.contrib import admin
+from django.utils.html import format_html
 
 from .emails import send_blog_newsletter
-from .models import BlogPost, ContactMessage, EmailSubscription, HomeAd
+from .models import BlogPost, ContactMessage, EmailSubscription, HomeAd, TeamMember
 
 
 # Customise admin branding
@@ -39,6 +40,47 @@ class HomeAdAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
+
+
+@admin.register(TeamMember)
+class TeamMemberAdmin(admin.ModelAdmin):
+    """Upload team photos and manage leadership profiles shown on About."""
+
+    list_display = ('name', 'role', 'department', 'display_order', 'is_active', 'photo_preview')
+    list_filter = ('is_active', 'department')
+    search_fields = ('name', 'role', 'department', 'bio')
+    list_editable = ('display_order', 'is_active')
+    readonly_fields = ('created_at', 'updated_at', 'photo_preview')
+    fieldsets = (
+        ('Profile', {
+            'fields': ('name', 'role', 'department', 'bio', 'initials'),
+        }),
+        ('Photo', {
+            'fields': ('photo', 'photo_preview'),
+            'description': 'Upload a portrait. If empty, initials are shown instead.',
+        }),
+        ('Links', {
+            'fields': ('email', 'linkedin_url'),
+            'classes': ('collapse',),
+        }),
+        ('Display', {
+            'fields': ('display_order', 'is_active'),
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
+        }),
+    )
+
+    @admin.display(description='Photo')
+    def photo_preview(self, obj):
+        if obj.pk and obj.photo:
+            return format_html(
+                '<img src="{}" alt="{}" style="width:64px;height:64px;object-fit:cover;border-radius:50%;" />',
+                obj.photo.url,
+                obj.name,
+            )
+        return '—'
 
 
 @admin.register(BlogPost)

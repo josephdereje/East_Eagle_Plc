@@ -282,44 +282,75 @@
             <span class="section-tag">Leadership</span>
             <h2 class="section-title">Our <span class="gold-text">Team</span></h2>
             <div class="gold-divider"></div>
+            <p class="section-desc">The people driving East Eagle’s import, export, and trade operations.</p>
         </div>
         <div class="team-grid">
-            <div class="team-card reveal">
-                <div class="team-avatar">CEO</div>
-                <h4>Chief Executive Officer</h4>
-                <span class="team-role">Managing Director</span>
-                <p>Leads corporate strategy, partnerships, and overall company direction.</p>
-            </div>
-            <div class="team-card reveal reveal-delay">
-                <div class="team-avatar">OD</div>
-                <h4>Operations Director</h4>
-                <span class="team-role">Operations</span>
-                <p>Oversees import, export, and trade facilitation operations.</p>
-            </div>
-            <div class="team-card reveal reveal-delay">
-                <div class="team-avatar">ME</div>
-                <h4>Mining Export Head</h4>
-                <span class="team-role">Mining</span>
-                <p>Manages lithium, copper, gold and mineral commodity exports.</p>
-            </div>
-            <div class="team-card reveal reveal-delay-2">
-                <div class="team-avatar">IT</div>
-                <h4>IT &amp; Computer Division</h4>
-                <span class="team-role">Technology</span>
-                <p>Leads computer import and IT equipment distribution.</p>
-            </div>
-            <div class="team-card reveal reveal-delay-2">
-                <div class="team-avatar">RE</div>
-                <h4>Renewable Energy Head</h4>
-                <span class="team-role">Energy</span>
-                <p>Directs solar panels, inverters, batteries and power systems.</p>
-            </div>
-            <div class="team-card reveal reveal-delay-3">
-                <div class="team-avatar">TF</div>
-                <h4>Trade Facilitation Head</h4>
-                <span class="team-role">Procurement</span>
-                <p>Manages sourcing, logistics, and supply chain solutions.</p>
-            </div>
+            {% if team_members %}
+                {% for member in team_members %}
+                <article class="team-card reveal{% cycle '' ' reveal-delay' ' reveal-delay-2' ' reveal-delay-3' %}">
+                    {% if member.photo %}
+                    <div class="team-avatar team-avatar-photo">
+                        <img src="{{ member.photo.url }}" alt="{{ member.name }}" loading="lazy">
+                    </div>
+                    {% else %}
+                    <div class="team-avatar">{{ member.initials|default:"EE" }}</div>
+                    {% endif %}
+                    <h4>{{ member.name }}</h4>
+                    <span class="team-role">{{ member.role }}</span>
+                    {% if member.department %}
+                    <span class="team-dept">{{ member.department }}</span>
+                    {% endif %}
+                    {% if member.bio %}<p>{{ member.bio }}</p>{% endif %}
+                    {% if member.email or member.linkedin_url %}
+                    <div class="team-links">
+                        {% if member.email %}
+                        <a href="mailto:{{ member.email }}" class="team-link" aria-label="Email {{ member.name }}">Email</a>
+                        {% endif %}
+                        {% if member.linkedin_url %}
+                        <a href="{{ member.linkedin_url }}" class="team-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            {% else %}
+                <div class="team-card reveal">
+                    <div class="team-avatar">CEO</div>
+                    <h4>Chief Executive Officer</h4>
+                    <span class="team-role">Managing Director</span>
+                    <p>Leads corporate strategy, partnerships, and overall company direction.</p>
+                </div>
+                <div class="team-card reveal reveal-delay">
+                    <div class="team-avatar">OD</div>
+                    <h4>Operations Director</h4>
+                    <span class="team-role">Operations</span>
+                    <p>Oversees import, export, and trade facilitation operations.</p>
+                </div>
+                <div class="team-card reveal reveal-delay">
+                    <div class="team-avatar">ME</div>
+                    <h4>Mining Export Head</h4>
+                    <span class="team-role">Mining</span>
+                    <p>Manages lithium, copper, gold and mineral commodity exports.</p>
+                </div>
+                <div class="team-card reveal reveal-delay-2">
+                    <div class="team-avatar">IT</div>
+                    <h4>IT &amp; Computer Division</h4>
+                    <span class="team-role">Technology</span>
+                    <p>Leads computer import and IT equipment distribution.</p>
+                </div>
+                <div class="team-card reveal reveal-delay-2">
+                    <div class="team-avatar">RE</div>
+                    <h4>Renewable Energy Head</h4>
+                    <span class="team-role">Energy</span>
+                    <p>Directs solar panels, inverters, batteries and power systems.</p>
+                </div>
+                <div class="team-card reveal reveal-delay-3">
+                    <div class="team-avatar">TF</div>
+                    <h4>Trade Facilitation Head</h4>
+                    <span class="team-role">Procurement</span>
+                    <p>Manages sourcing, logistics, and supply chain solutions.</p>
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>

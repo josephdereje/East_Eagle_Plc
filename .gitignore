@@ -25,3 +25,6 @@ env/
 
 # Static collected files
 staticfiles/
+
+# User-uploaded media (team photos, etc.)
+media/

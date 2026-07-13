@@ -10,6 +10,7 @@
             "author": "East Eagle Team",
             "image_url": "https://images.unsplash.com/photo-1581094794329-cd2b2e9ac8e0?w=800&q=80",
             "is_published": true,
+            "newsletter_sent": false,
             "created_at": "2026-03-15T10:00:00Z",
             "updated_at": "2026-03-15T10:00:00Z"
         }
@@ -25,6 +26,7 @@
             "author": "East Eagle Team",
             "image_url": "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80",
             "is_published": true,
+            "newsletter_sent": false,
             "created_at": "2026-04-22T10:00:00Z",
             "updated_at": "2026-04-22T10:00:00Z"
         }
@@ -40,8 +42,73 @@
             "author": "East Eagle Team",
             "image_url": "https://images.unsplash.com/photo-1581094288330-2311510663f6?w=800&q=80",
             "is_published": true,
+            "newsletter_sent": false,
             "created_at": "2026-05-10T10:00:00Z",
             "updated_at": "2026-05-10T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 4,
+        "fields": {
+            "title": "Choosing the Right Excavator for Ethiopian Job Sites",
+            "slug": "choosing-right-excavator-ethiopia",
+            "excerpt": "A practical guide to selecting excavator class, reach, and attachments for roadworks, mining support, and urban construction across Ethiopia.",
+            "content": "Selecting the right excavator can make or break project timelines. At East Eagle Trading PLC, we help contractors match machine class to terrain, soil type, and production targets.\n\nCommon choices for Ethiopian sites:\n- 20-ton class: urban utility trenches, residential foundations, and municipal works\n- 30–35 ton class: highway cuts, quarry support, and bulk earthmoving\n- Long-reach variants: canal work, dredging-adjacent tasks, and deep excavation\n\nBeyond tonnage, operators should evaluate hydraulic flow for attachments, fuel efficiency on long shifts, and spare-parts availability. We stock certified excavators with service-ready packages so your fleet stays productive.\n\nTalk to our construction machinery team for a site-fit recommendation and delivery timeline.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80",
+            "is_published": true,
+            "newsletter_sent": false,
+            "created_at": "2026-06-02T10:00:00Z",
+            "updated_at": "2026-06-02T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 5,
+        "fields": {
+            "title": "Wheel Loaders That Keep Aggregate Moving",
+            "slug": "wheel-loaders-aggregate-handling",
+            "excerpt": "How modern wheel loaders improve cycle times for quarries, batching plants, and logistics yards — and what to look for before you buy or rent.",
+            "content": "Wheel loaders are the backbone of material handling on construction and quarry sites. East Eagle supplies loaders sized for Ethiopian aggregate yards, ready-mix plants, and warehouse yards.\n\nWhat matters most:\n- Bucket capacity matched to truck bodies\n- Visibility and stability on uneven stockpile surfaces\n- Transmission options for stop-start loading cycles\n- Tire compound suited to abrasive rock and dust\n\nOur import program focuses on machines with strong aftermarket support. Whether you need a compact yard loader or a high-capacity production unit, we can arrange inspection, shipping, and commissioning support.\n\nRequest a quote for current wheel loader availability and financing options.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80",
+            "is_published": true,
+            "newsletter_sent": false,
+            "created_at": "2026-06-18T10:00:00Z",
+            "updated_at": "2026-06-18T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 6,
+        "fields": {
+            "title": "Road Compaction Equipment for Longer-Lasting Highways",
+            "slug": "road-compaction-equipment-highways",
+            "excerpt": "Soil and asphalt compactors are essential for durable pavements. Here's how East Eagle supports contractors with the right rollers for Ethiopia's road boom.",
+            "content": "Good roads start with proper compaction. As national and regional highway projects expand, contractors need reliable single-drum and tandem rollers that deliver density without over-vibrating sensitive layers.\n\nEast Eagle Trading PLC supplies:\n- Smooth-drum rollers for embankments and sub-base\n- Padfoot options for cohesive soils\n- Tandem asphalt rollers for wearing courses\n\nWe advise on amplitude settings, pass counts, and moisture control so pavement performance matches design life. Machines arrive with documentation and optional operator orientation for your crew.\n\nContact us to align compaction equipment with your next road package.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
+            "is_published": true,
+            "newsletter_sent": false,
+            "created_at": "2026-07-01T10:00:00Z",
+            "updated_at": "2026-07-01T10:00:00Z"
+        }
+    },
+    {
+        "model": "website.blogpost",
+        "pk": 7,
+        "fields": {
+            "title": "Spare Parts & Downtime: Keeping Heavy Machinery Productive",
+            "slug": "spare-parts-heavy-machinery-uptime",
+            "excerpt": "A short downtime strategy for excavators and loaders — filters, wear parts, and planned maintenance that East Eagle can help you stock.",
+            "content": "Heavy equipment earns money only when it runs. Unexpected downtime from missing filters, pins, or hydraulic hoses can stall an entire site.\n\nOur construction machinery support approach:\n- Critical spare kits for excavators and loaders\n- Wear-part planning for buckets, teeth, and cutting edges\n- Scheduled maintenance guidance for dusty highland environments\n- Fast sourcing through international supplier networks\n\nPair your machine purchase or rental with a parts plan, and you protect both schedule and margin. East Eagle's team can build a starter inventory list based on your fleet mix and project duration.\n\nReach out to set up parts support before your next mobilization.",
+            "author": "East Eagle Team",
+            "image_url": "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80",
+            "is_published": true,
+            "newsletter_sent": false,
+            "created_at": "2026-07-08T10:00:00Z",
+            "updated_at": "2026-07-08T10:00:00Z"
         }
     }
 ]

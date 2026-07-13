@@ -1,0 +1,110 @@
+[
+  {
+    "model": "website.teammember",
+    "pk": 1,
+    "fields": {
+      "name": "Abebe Kebede",
+      "role": "Chief Executive Officer",
+      "department": "Managing Director",
+      "bio": "Leads corporate strategy, partnerships, and overall company direction across import and export lines.",
+      "photo": "",
+      "initials": "AK",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 1,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "website.teammember",
+    "pk": 2,
+    "fields": {
+      "name": "Sara Hailu",
+      "role": "Operations Director",
+      "department": "Operations",
+      "bio": "Oversees import, export, logistics coordination, and day-to-day trade facilitation.",
+      "photo": "",
+      "initials": "SH",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 2,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "website.teammember",
+    "pk": 3,
+    "fields": {
+      "name": "Dawit Mengistu",
+      "role": "Mining Export Head",
+      "department": "Mining",
+      "bio": "Manages lithium, copper, gold and mineral commodity exports to international markets.",
+      "photo": "",
+      "initials": "DM",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 3,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "website.teammember",
+    "pk": 4,
+    "fields": {
+      "name": "Hana Tadesse",
+      "role": "IT & Computer Division Head",
+      "department": "Technology",
+      "bio": "Leads computer import and IT equipment distribution for businesses and institutions.",
+      "photo": "",
+      "initials": "HT",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 4,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "website.teammember",
+    "pk": 5,
+    "fields": {
+      "name": "Yonas Bekele",
+      "role": "Renewable Energy Head",
+      "department": "Energy",
+      "bio": "Directs solar panels, inverters, batteries and complete power system supply.",
+      "photo": "",
+      "initials": "YB",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 5,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  },
+  {
+    "model": "website.teammember",
+    "pk": 6,
+    "fields": {
+      "name": "Meron Alemu",
+      "role": "Construction Machinery Lead",
+      "department": "Machinery",
+      "bio": "Coordinates excavator, loader and industrial equipment import for infrastructure projects.",
+      "photo": "",
+      "initials": "MA",
+      "email": "",
+      "linkedin_url": "",
+      "display_order": 6,
+      "is_active": true,
+      "created_at": "2026-01-10T09:00:00Z",
+      "updated_at": "2026-01-10T09:00:00Z"
+    }
+  }
+]

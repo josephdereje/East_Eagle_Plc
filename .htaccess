@@ -1,0 +1,13 @@
+# cPanel Passenger — Django app
+PassengerEnabled On
+PassengerAppRoot /home/USERNAME/easteagleplc
+PassengerBaseURI /
+PassengerPython /home/USERNAME/virtualenv/easteagleplc/3.11/bin/python3.11
+PassengerAppType wsgi
+PassengerStartupFile passenger_wsgi.py
+
+# Serve uploaded team photos (edit USERNAME and path to match your server)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^media/(.*)$ /home/USERNAME/easteagleplc/media/$1 [L]
+</IfModule>

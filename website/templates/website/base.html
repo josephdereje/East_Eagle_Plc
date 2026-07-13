@@ -3,9 +3,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="East Eagle Trading PLC — Import, Export & Trading company in Ethiopia since 2021. Mining, Renewable Energy, FMCG, IT Equipment & Construction Machinery.">
+    <meta name="theme-color" content="#0A0E1A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>{% block title %}East Eagle Trading PLC{% endblock %}</title>
+
+    <!-- Favicon (logo-based) -->
+    <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,10 +45,10 @@
     <header class="navbar" id="navbar">
         <div class="container nav-container">
             <a href="{% url 'index' %}" class="nav-logo">
-                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="logo-img">
+                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="logo-img logo-animate">
             </a>
 
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
 
