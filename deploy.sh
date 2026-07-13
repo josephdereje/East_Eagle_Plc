@@ -13,11 +13,11 @@ pip install -r requirements.txt
 if [ "${DB_ENGINE:-}" = "mysql" ]; then
   pip install -r requirements-mysql.txt
 fi
-python manage.py migrate
+python manage.py migrate --noinput
 python manage.py collectstatic --noinput
 
-# Restart Passenger app (cPanel reads this file's timestamp)
-mkdir -p tmp
+# Upload folders for blog covers and team photos
+mkdir -p media/blog media/team tmp
 touch tmp/restart.txt
 
 echo ""

@@ -191,3 +191,5 @@ chmod -R u+rwX /home/easteag1/easteagleplc
 | 500 error | Check logs in app folder; verify env vars |
 | `mysqlclient` build failed | Use SQLite (default) — run `pip install -r requirements.txt` only; skip `requirements-mysql.txt` |
 | Static files missing | `python manage.py collectstatic --noinput` + restart |
+| `no such column: website_blogpost.image` on `/blogs/` | Run `python manage.py migrate --noinput` then `touch tmp/restart.txt` |
+| Blog page shows Django debug error page | Set `DJANGO_DEBUG=False` in cPanel env vars, then restart |
