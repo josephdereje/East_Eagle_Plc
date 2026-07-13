@@ -25,20 +25,22 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = env_bool('DJANGO_DEBUG', True)
 
-ALLOWED_HOSTS = env_list(
-    'DJANGO_ALLOWED_HOSTS',
-    'localhost,127.0.0.1,easteagleplc.com,www.easteagleplc.com',
-)
-# Always allow both production domains (cPanel env may omit www)
-_PRODUCTION_HOSTS = ('easteagleplc.com', 'www.easteagleplc.com')
-ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + list(_PRODUCTION_HOSTS)))
+# Production domains are always allowed (cPanel env often omits www)
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'easteagleplc.com',
+    'www.easteagleplc.com',
+]
+ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + env_list('DJANGO_ALLOWED_HOSTS', '')))
 
-CSRF_TRUSTED_ORIGINS = env_list(
-    'DJANGO_CSRF_TRUSTED_ORIGINS',
-    'https://easteagleplc.com,https://www.easteagleplc.com',
+CSRF_TRUSTED_ORIGINS = [
+    'https://easteagleplc.com',
+    'https://www.easteagleplc.com',
+]
+CSRF_TRUSTED_ORIGINS = list(
+    dict.fromkeys(CSRF_TRUSTED_ORIGINS + env_list('DJANGO_CSRF_TRUSTED_ORIGINS', ''))
 )
-_PRODUCTION_ORIGINS = ('https://easteagleplc.com', 'https://www.easteagleplc.com')
-CSRF_TRUSTED_ORIGINS = list(dict.fromkeys(CSRF_TRUSTED_ORIGINS + list(_PRODUCTION_ORIGINS)))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
