@@ -1,9 +1,9 @@
 #!/bin/bash
-# Run this on your cPanel server after uploading the project.
+# Run on cPanel server — app path: /home/easteag1/easteagleplc
 set -e
 
-APP_DIR="${APP_DIR:-$HOME/easteagleplc}"
-VENV_DIR="${VENV_DIR:-$HOME/virtualenv/easteagleplc/3.11}"
+APP_DIR="${APP_DIR:-/home/easteag1/easteagleplc}"
+VENV_DIR="${VENV_DIR:-/home/easteag1/virtualenv/easteagleplc/3.11}"
 
 cd "$APP_DIR"
 source "$VENV_DIR/bin/activate"
@@ -13,7 +13,8 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 echo ""
-echo "Done. Next steps:"
+echo "Done. App path: $APP_DIR"
+echo "Next steps:"
 echo "  1. Set environment variables in cPanel → Setup Python App"
 echo "  2. Run: python manage.py createsuperuser"
 echo "  3. Restart the Python app in cPanel"
