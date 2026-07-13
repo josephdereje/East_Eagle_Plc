@@ -48,13 +48,10 @@
                 <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="logo-img logo-animate">
             </a>
 
-            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-            <nav class="nav-menu" id="nav-menu">
+            <nav class="nav-menu" id="nav-menu" aria-label="Main navigation">
+                <p class="nav-menu-heading">Menu</p>
                 <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
-                <a href="{% url 'index' %}#services" class="nav-link">Services</a>
+                <a href="{% url 'index' %}#services" class="nav-link nav-link-services">Services</a>
                 <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
                 <a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blogs</a>
                 <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
@@ -72,6 +69,10 @@
                     <a href="#" aria-label="LinkedIn" class="social-icon">IN</a>
                 </div>
             </div>
+
+            <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
 
@@ -126,6 +127,30 @@
             <p>&copy; {% now "Y" %} East Eagle Trading PLC · ኢስት ኤግል ትሬዲንግ ኃላውተ የግል ማህበር · All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Mobile bottom navigation (phones & tablets) -->
+    <nav class="mobile-bottom-nav" aria-label="Quick navigation">
+        <a href="{% url 'index' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+            <span class="mobile-nav-icon" aria-hidden="true">⌂</span>
+            <span class="mobile-nav-label">Home</span>
+        </a>
+        <a href="{% url 'index' %}#services" class="mobile-nav-item mobile-nav-services">
+            <span class="mobile-nav-icon" aria-hidden="true">◆</span>
+            <span class="mobile-nav-label">Services</span>
+        </a>
+        <a href="{% url 'about' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
+            <span class="mobile-nav-icon" aria-hidden="true">◎</span>
+            <span class="mobile-nav-label">About</span>
+        </a>
+        <a href="{% url 'blogs' %}" class="mobile-nav-item {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">
+            <span class="mobile-nav-icon" aria-hidden="true">✎</span>
+            <span class="mobile-nav-label">Blogs</span>
+        </a>
+        <a href="{% url 'contact' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
+            <span class="mobile-nav-icon" aria-hidden="true">✉</span>
+            <span class="mobile-nav-label">Contact</span>
+        </a>
+    </nav>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script src="{% static 'js/script.js' %}"></script>
