@@ -2357,7 +2357,6 @@ main, header, footer { position: relative; z-index: 1; }
 
     body.nav-open {
         overflow: hidden;
-        touch-action: none;
     }
 
     body.nav-open .navbar {
@@ -2370,10 +2369,16 @@ main, header, footer { position: relative; z-index: 1; }
         inset: 0;
         background: rgba(0, 0, 0, 0.55);
         z-index: 1001;
+        touch-action: manipulation;
     }
 
     body.nav-open .mobile-bottom-nav {
         display: none;
+    }
+
+    .nav-menu .nav-link {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(212, 175, 55, 0.2);
     }
 
     .hero-grid {
@@ -2472,22 +2477,23 @@ main, header, footer { position: relative; z-index: 1; }
         -webkit-backdrop-filter: blur(16px);
     }
 
-    /* Phones use bottom tab bar — hide slide-out menu to avoid overlap */
-    .nav-toggle {
-        display: none;
-    }
-
     .nav-container {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr auto auto;
     }
 
-    .nav-menu,
-    .nav-menu.open {
-        display: none !important;
+    .nav-toggle {
+        display: flex;
+        width: 44px;
+        height: 44px;
+        z-index: 1004;
     }
 
-    body.nav-open::before {
-        display: none;
+    .nav-menu {
+        padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    }
+
+    body.nav-open .nav-menu {
+        z-index: 1005;
     }
 
     .logo-img {
