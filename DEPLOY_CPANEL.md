@@ -108,9 +108,12 @@ chmod +x deploy.sh update_static.sh
 `deploy.sh` does:
 1. `source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate`
 2. `python manage.py migrate --noinput`
-3. `python manage.py collectstatic --noinput`
+3. `python manage.py collectstatic --noinput --clear` (removes old CSS/JS, copies fresh files)
 4. `touch tmp/restart.txt`
 5. Smoke-test pages + static files on `https://www.easteagleplc.com`
+6. Verify live CSS contains latest styles (`nav-drawer-list` marker)
+
+**CSS not updating on phone?** After deploy, close the browser tab and reopen, or clear browser cache. The deploy script uses `--clear` to replace old static files on the server.
 
 ### Static files only (CSS/JS/images changed)
 
@@ -126,10 +129,10 @@ Or run manually:
 ```bash
 cd /home/easteag1/easteagleplc
 source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate
-python manage.py collectstatic --noinput
+python manage.py collectstatic --noinput --clear
 touch tmp/restart.txt
-curl -s -o /dev/null -w "CSS: %{http_code}\n" https://www.easteagleplc.com/static/css/style.css
-curl -s -o /dev/null -w "JS:  %{http_code}\n" https://www.easteagleplc.com/static/js/script.js
+curl -s -H "Cache-Control: no-cache" -o /dev/null -w "CSS: %{http_code}\n" "https://www.easteagleplc.com/static/css/style.css?v=$(date +%s)"
+curl -s -H "Cache-Control: no-cache" -o /dev/null -w "JS:  %{http_code}\n" "https://www.easteagleplc.com/static/js/script.js?v=$(date +%s)"
 ```
 
 ### First-time setup only (install packages + sample data)
@@ -230,7 +233,7 @@ chmod -R u+rwX /home/easteag1/easteagleplc
 | `Permission denied` on `.git` | Run chown/chmod above, then `rm -rf .git` and pull again |
 | 500 error | Check logs in app folder; verify env vars |
 | `mysqlclient` build failed | Use SQLite (default) — run `pip install -r requirements.txt` only; skip `requirements-mysql.txt` |
-| Static files missing | `python manage.py collectstatic --noinput` + restart |
+| Static files missing / old CSS | `python manage.py collectstatic --noinput --clear` then `touch tmp/restart.txt` |
 | `no such column: website_blogpost.image` on `/blogs/` | Run `python manage.py migrate --noinput` then `touch tmp/restart.txt` |
 | Blog page shows Django debug error page | Set `DJANGO_DEBUG=False` in cPanel env vars, then restart |
 | **403 Forbidden** (LiteSpeed page) | Restart Python app in cPanel; run `./deploy.sh`; check **Setup Python App** is **Running** |
