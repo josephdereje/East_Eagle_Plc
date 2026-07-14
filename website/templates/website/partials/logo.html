@@ -1,0 +1,17 @@
+{% load static %}
+{# Crisp multi-resolution logo: WebP first for modern browsers, high-res PNG fallback #}
+<picture class="{{ picture_class|default:'' }}">
+    <source
+        type="image/webp"
+        srcset="{% static 'images/logo-transparent.webp' %} 1x,
+                {% static 'images/logo-transparent-4x.webp' %} 3x">
+    <img
+        src="{% static 'images/logo-transparent.png' %}"
+        alt="{{ alt|default:'East Eagle Trading PLC' }}"
+        class="{{ class_name }}"
+        width="{{ width|default:'406' }}"
+        height="{{ height|default:'360' }}"
+        decoding="async"
+        {% if fetchpriority %}fetchpriority="{{ fetchpriority }}"{% endif %}
+        {% if loading %}loading="{{ loading }}"{% endif %}>
+</picture>
