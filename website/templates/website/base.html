@@ -67,17 +67,19 @@
                 </button>
             </div>
         </header>
-
-        <!-- Slide-out menu lives outside .navbar to avoid iOS backdrop-filter clipping -->
-        <nav class="nav-menu" id="nav-menu" aria-label="Main navigation" aria-hidden="true">
-            <p class="nav-menu-heading">Menu</p>
-            <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
-            <a href="{% url 'index' %}#services" class="nav-link nav-link-services">Services</a>
-            <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
-            <a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blogs</a>
-            <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
-        </nav>
     </div>
+
+    <!-- Mobile slide-out menu (body-level — avoids header clipping on iOS) -->
+    <nav class="nav-menu" id="nav-menu" aria-label="Main navigation" aria-hidden="true">
+        <p class="nav-menu-heading">Menu</p>
+        <ul class="nav-drawer-list">
+            <li><a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+            <li><a href="{% url 'index' %}#services" class="nav-link nav-link-services">Service</a></li>
+            <li><a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a></li>
+            <li><a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blog</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Django flash messages -->
     {% if messages %}
@@ -139,7 +141,7 @@
         </a>
         <a href="{% url 'index' %}#services" class="mobile-nav-item mobile-nav-services">
             <span class="mobile-nav-icon" aria-hidden="true">◆</span>
-            <span class="mobile-nav-label">Services</span>
+            <span class="mobile-nav-label">Service</span>
         </a>
         <a href="{% url 'about' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'about' %}active{% endif %}">
             <span class="mobile-nav-icon" aria-hidden="true">◎</span>
@@ -147,7 +149,7 @@
         </a>
         <a href="{% url 'blogs' %}" class="mobile-nav-item {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">
             <span class="mobile-nav-icon" aria-hidden="true">✎</span>
-            <span class="mobile-nav-label">Blogs</span>
+            <span class="mobile-nav-label">Blog</span>
         </a>
         <a href="{% url 'contact' %}" class="mobile-nav-item {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">
             <span class="mobile-nav-icon" aria-hidden="true">✉</span>
