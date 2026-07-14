@@ -48,15 +48,6 @@
                 <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="logo-img logo-animate">
             </a>
 
-            <nav class="nav-menu" id="nav-menu" aria-label="Main navigation">
-                <p class="nav-menu-heading">Menu</p>
-                <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
-                <a href="{% url 'index' %}#services" class="nav-link nav-link-services">Services</a>
-                <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
-                <a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blogs</a>
-                <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
-            </nav>
-
             <div class="nav-actions">
                 <button class="theme-toggle" id="theme-toggle" aria-label="Toggle day/night mode" title="Switch theme">
                     <span class="theme-icon theme-icon-sun" aria-hidden="true">☀</span>
@@ -75,6 +66,16 @@
             </button>
         </div>
     </header>
+
+    {# Outside .navbar so position:fixed is not trapped by navbar backdrop-filter #}
+    <nav class="nav-menu" id="nav-menu" aria-label="Main navigation">
+        <p class="nav-menu-heading">Menu</p>
+        <a href="{% url 'index' %}" class="nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a>
+        <a href="{% url 'index' %}#services" class="nav-link nav-link-services">Services</a>
+        <a href="{% url 'about' %}" class="nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}">About</a>
+        <a href="{% url 'blogs' %}" class="nav-link {% if 'blog' in request.resolver_match.url_name %}active{% endif %}">Blogs</a>
+        <a href="{% url 'contact' %}" class="nav-link {% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a>
+    </nav>
 
     <!-- Django flash messages -->
     {% if messages %}
