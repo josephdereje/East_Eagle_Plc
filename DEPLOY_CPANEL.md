@@ -47,10 +47,19 @@ git reset --hard origin/main
 ```
 
 Future updates:
+
 ```bash
 cd /home/easteag1/easteagleplc
 git pull origin main
 ./deploy.sh
+```
+
+Static/CSS/JS only:
+
+```bash
+cd /home/easteag1/easteagleplc
+git pull origin main
+./update_static.sh
 ```
 
 ---
@@ -82,47 +91,77 @@ Create the mailbox first: cPanel → **Email Accounts** → add `info@easteaglep
 
 ---
 
-## Step 3 — Install & deploy
+## Step 3 — Deploy (env already set in cPanel)
+
+Environment variables and Python packages are already configured in cPanel.  
+For routine updates you only need to **pull code**, **source the venv**, **update static**, **restart**, and **test**.
+
+### One command (recommended)
+
+```bash
+cd /home/easteag1/easteagleplc
+git pull origin main
+chmod +x deploy.sh update_static.sh
+./deploy.sh
+```
+
+`deploy.sh` does:
+1. `source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate`
+2. `python manage.py migrate --noinput`
+3. `python manage.py collectstatic --noinput`
+4. `touch tmp/restart.txt`
+5. Smoke-test pages + static files on `https://www.easteagleplc.com`
+
+### Static files only (CSS/JS/images changed)
 
 ```bash
 cd /home/easteag1/easteagleplc
 source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate
-
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py collectstatic --noinput
-python manage.py loaddata sample_blogs sample_team sample_home_ads
-python manage.py createsuperuser
+chmod +x update_static.sh
+./update_static.sh
 ```
 
-**SQLite (default):** `pip install -r requirements.txt` is enough — do **not** install `requirements-mysql.txt`.
+Or run manually:
 
-**MySQL only:** set `DB_ENGINE=mysql` in cPanel, then run `pip install -r requirements-mysql.txt` (may fail on shared hosting).
-
-Or use the deploy script:
 ```bash
 cd /home/easteag1/easteagleplc
-chmod +x deploy.sh
-./deploy.sh
+source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate
+python manage.py collectstatic --noinput
+touch tmp/restart.txt
+curl -s -o /dev/null -w "CSS: %{http_code}\n" https://www.easteagleplc.com/static/css/style.css
+curl -s -o /dev/null -w "JS:  %{http_code}\n" https://www.easteagleplc.com/static/js/script.js
+```
+
+### First-time setup only (install packages + sample data)
+
+```bash
+cd /home/easteag1/easteagleplc
+source /home/easteag1/virtualenv/easteagleplc/3.9/bin/activate
+INSTALL_DEPS=1 ./deploy.sh
 python manage.py loaddata sample_blogs sample_team sample_home_ads
 python manage.py createsuperuser
 ```
 
 ---
 
-## Step 4 — Restart app
+## Step 4 — Restart & test
 
-Either use cPanel → **Setup Python App** → `easteagleplc` → **Restart**, or run:
+`deploy.sh` and `update_static.sh` both run `touch tmp/restart.txt` automatically.
+
+Manual restart if needed:
 
 ```bash
 cd /home/easteag1/easteagleplc
 touch tmp/restart.txt
 ```
 
-Passenger restarts the app on the next request when `tmp/restart.txt` is touched.
-(There is no `touch.py` file — the command is `touch tmp/restart.txt`.)
+Or: cPanel → **Setup Python App** → `easteagleplc` → **Restart**.
 
-Visit (always use **www**):
+Tests run automatically in `./deploy.sh`. Override site URL:
+
+```bash
+SITE_URL=https://www.easteagleplc.com ./deploy.sh
+```
 - **Website:** `https://www.easteagleplc.com/`
 - **Admin:** `https://www.easteagleplc.com/admin/`
 
@@ -159,8 +198,9 @@ Until apex SSL is fixed, `.htaccess` redirects **http** visitors to `https://www
 cd /home/easteag1/easteagleplc
 git pull origin main
 ./deploy.sh
-touch tmp/restart.txt
 ```
+
+Checks: `/` `/about/` `/blogs/` `/contact/` `/static/css/style.css` `/static/js/script.js` `/admin/`
 
 ---
 

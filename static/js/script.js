@@ -152,6 +152,7 @@
         const navbar = document.getElementById('navbar');
         const toggle = document.getElementById('nav-toggle');
         const menu = document.getElementById('nav-menu');
+        const mobileMenuQuery = window.matchMedia('(max-width: 768px)');
 
         function closeMenu() {
             if (!menu || !toggle) return;
@@ -161,15 +162,20 @@
             document.body.classList.remove('nav-open');
         }
 
+        function syncMenuMode() {
+            if (mobileMenuQuery.matches) closeMenu();
+        }
+
         // Add shadow on scroll
         window.addEventListener('scroll', function () {
             if (!navbar) return;
             navbar.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // Mobile menu toggle
+        // Mobile menu toggle (tablets only — phones use bottom tab bar)
         if (toggle && menu) {
             toggle.addEventListener('click', function (e) {
+                if (mobileMenuQuery.matches) return;
                 e.stopPropagation();
                 const isOpen = menu.classList.toggle('open');
                 toggle.classList.toggle('open', isOpen);
@@ -192,6 +198,13 @@
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') closeMenu();
             });
+
+            if (typeof mobileMenuQuery.addEventListener === 'function') {
+                mobileMenuQuery.addEventListener('change', syncMenuMode);
+            } else if (typeof mobileMenuQuery.addListener === 'function') {
+                mobileMenuQuery.addListener(syncMenuMode);
+            }
+            syncMenuMode();
         }
     }
 

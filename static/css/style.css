@@ -2267,6 +2267,11 @@ main, header, footer { position: relative; z-index: 1; }
    RESPONSIVE — tablet & phone (Android / iOS)
    ============================================================ */
 @media (max-width: 992px) {
+    .navbar {
+        padding-top: env(safe-area-inset-top);
+        height: calc(var(--nav-height) + env(safe-area-inset-top));
+    }
+
     .nav-toggle {
         display: flex;
         width: 44px;
@@ -2281,6 +2286,8 @@ main, header, footer { position: relative; z-index: 1; }
         flex-shrink: 0;
         touch-action: manipulation;
         cursor: pointer;
+        position: relative;
+        z-index: 1004;
     }
 
     .nav-social { display: none; }
@@ -2299,6 +2306,7 @@ main, header, footer { position: relative; z-index: 1; }
         left: 0;
         right: 0;
         bottom: 0;
+        display: flex;
         flex-direction: column;
         align-items: stretch;
         background: rgba(8, 10, 18, 0.98);
@@ -2306,8 +2314,9 @@ main, header, footer { position: relative; z-index: 1; }
         gap: 2px;
         transform: translateX(100%);
         opacity: 0;
+        visibility: hidden;
         pointer-events: none;
-        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease, visibility 0.3s ease;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         z-index: 1002;
@@ -2316,6 +2325,7 @@ main, header, footer { position: relative; z-index: 1; }
     .nav-menu.open {
         transform: translateX(0);
         opacity: 1;
+        visibility: visible;
         pointer-events: auto;
     }
 
@@ -2348,6 +2358,10 @@ main, header, footer { position: relative; z-index: 1; }
     body.nav-open {
         overflow: hidden;
         touch-action: none;
+    }
+
+    body.nav-open .navbar {
+        z-index: 1003;
     }
 
     body.nav-open::before {
@@ -2456,6 +2470,24 @@ main, header, footer { position: relative; z-index: 1; }
         height: calc(var(--nav-height) + env(safe-area-inset-top));
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Phones use bottom tab bar — hide slide-out menu to avoid overlap */
+    .nav-toggle {
+        display: none;
+    }
+
+    .nav-container {
+        grid-template-columns: 1fr auto;
+    }
+
+    .nav-menu,
+    .nav-menu.open {
+        display: none !important;
+    }
+
+    body.nav-open::before {
+        display: none;
     }
 
     .logo-img {
@@ -2610,21 +2642,29 @@ main, header, footer { position: relative; z-index: 1; }
     }
 
     .hero-stats {
-        gap: 12px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
         width: 100%;
-        justify-content: space-between;
-        flex-wrap: nowrap;
+        justify-content: stretch;
     }
 
     .stat-item {
-        flex: 1;
         min-width: 0;
+        padding: 10px 6px;
+        border-radius: 10px;
+        background: rgba(212, 175, 55, 0.06);
+        border: 1px solid rgba(212, 175, 55, 0.12);
     }
 
-    .stat-number { font-size: 1.4rem; }
+    .stat-number { font-size: 1.35rem; }
     .stat-label {
         font-size: 0.58rem;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.3px;
+        line-height: 1.25;
+        white-space: normal;
+        word-break: break-word;
+        hyphens: auto;
     }
 
     .floating-card { display: none; }
@@ -2859,10 +2899,14 @@ main, header, footer { position: relative; z-index: 1; }
         gap: 8px;
     }
 
-    .stat-number { font-size: 1.25rem; }
+    .stat-item {
+        padding: 8px 4px;
+    }
+
+    .stat-number { font-size: 1.15rem; }
 
     .stat-label {
-        font-size: 0.52rem;
+        font-size: 0.5rem;
         letter-spacing: 0;
     }
 
