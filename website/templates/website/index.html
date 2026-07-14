@@ -11,7 +11,7 @@
     <div class="container hero-grid">
         <div class="hero-content reveal">
             <div class="hero-brand-mark reveal">
-                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="hero-logo logo-animate">
+                {% include 'website/partials/logo.html' with class_name='hero-logo logo-animate' fetchpriority='high' %}
                 <div class="hero-logo-ring" aria-hidden="true"></div>
             </div>
             <span class="hero-badge">Established since 2021 · Addis Ababa, Ethiopia</span>
@@ -114,7 +114,7 @@
             <div class="brand-logo-stage">
                 <div class="brand-orbit" aria-hidden="true"></div>
                 <div class="brand-orbit brand-orbit-2" aria-hidden="true"></div>
-                <img src="{% static 'images/logo-transparent.png' %}" alt="East Eagle Trading PLC" class="brand-stage-logo logo-animate">
+                {% include 'website/partials/logo.html' with class_name='brand-stage-logo logo-animate' loading='lazy' %}
             </div>
         </div>
         <div class="brand-showcase-copy reveal reveal-delay">

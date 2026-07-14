@@ -182,10 +182,12 @@
                 link.addEventListener('click', closeMenu);
             });
 
-            // Close when tapping the dimmed backdrop
+            // Close when tapping outside the panel / toggle
             document.addEventListener('click', function (e) {
                 if (!document.body.classList.contains('nav-open')) return;
                 if (menu.contains(e.target) || toggle.contains(e.target)) return;
+                // Keep header actions usable (theme toggle, logo) without accidental close
+                if (navbar && navbar.contains(e.target)) return;
                 closeMenu();
             });
 
