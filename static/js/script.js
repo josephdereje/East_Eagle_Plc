@@ -156,6 +156,7 @@
         function closeMenu() {
             if (!menu || !toggle) return;
             menu.classList.remove('open');
+            menu.setAttribute('aria-hidden', 'true');
             toggle.classList.remove('open');
             toggle.setAttribute('aria-expanded', 'false');
             toggle.setAttribute('aria-label', 'Open menu');
@@ -165,6 +166,7 @@
         function openMenu() {
             if (!menu || !toggle) return;
             menu.classList.add('open');
+            menu.setAttribute('aria-hidden', 'false');
             toggle.classList.add('open');
             toggle.setAttribute('aria-expanded', 'true');
             toggle.setAttribute('aria-label', 'Close menu');
